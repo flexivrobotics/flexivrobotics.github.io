@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Overview &mdash; Flexiv RDK 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="System Setup" href="2_SystemSetup.html" />
+    <link rel="prev" title="Preface" href="0_Preface.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Flexiv RDK
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="0_Preface.html">Preface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#robot-states">Robot states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-commands">User commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-features">Key features</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2_SystemSetup.html">System Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_RdkLibrary.html">RDK Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_Primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_Troubleshooting.html">Troubleshooting</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Flexiv RDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Overview</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/1_Overview.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>This quick start guide is an integral part of your new Flexiv Rizon. With Flexiv’s Robot Development Kit (RDK), developers will be able
+to connect their own workstation PC to Rizon via Ethernet (TCP/IP) connection, and send real-time low-level commands. This enables the
+developers to write powerful programs to operate Rizon in real time. The states and commands data between Rizon and the workstation PC
+are exchanged at a rate of 1kHz.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>RDK gives you full access to the robot. This means that you <em>cannot</em> issue commands through the teach pendant.
+Robot states, however, can still be read on the teach pendant.</p>
+</div>
+<section id="robot-states">
+<h2>Robot states<a class="headerlink" href="#robot-states" title="Permalink to this headline">¶</a></h2>
+<p>The available real-time robot states feedback from Rizon includes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Measured joint-space states: joint position, velocity, acceleration, and torque</p></li>
+<li><p>Computed Cartesian-space states: TCP pose, twist, and acceleration</p></li>
+<li><p>Estimated states: joint external torque and external wrench on TCP</p></li>
+<li><p>System status: emergency stop, digital IO, error message, etc</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="user-commands">
+<h2>User commands<a class="headerlink" href="#user-commands" title="Permalink to this headline">¶</a></h2>
+<p>To control Rizon, two types of user commands are accepted, in terms of update rate:</p>
+<ol class="arabic simple">
+<li><p>Real-time (RT) streaming commands at 1kHz update rate, including:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Gravity &amp; friction compensated joint torques command</p></li>
+<li><p>Joint positions command</p></li>
+<li><p>Cartesian pose command</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Since real-time data is streamed over the network at 1 kHz, a low-latency setup is required. Thus, a direct network connection (i.e. without switches/routers)
+and a workstation PC with real-time kernel is highly recommended. The setup details are covered in the subsequent sections.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Non-real-time (NRT) commands at less than 1kHz update rate, including:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Plan execution command</p></li>
+<li><p>Primitive execution command</p></li>
+<li><p>Sparse Cartesian pose command with assistance from Rizon’s internal motion generator</p></li>
+<li><p>Digital IO for controlling external devices</p></li>
+</ul>
+</div></blockquote>
+<p>The real-time commands can be calculated from user defined joint/Cartesian space motion generators, allowing developers to easily
+integrate perception and other sensor modules to generate reactive motions.</p>
+<p>As for the non-real-time commands, instead of creating a custom motion generator, developers can send plan, primitive, or relatively sparse Cartesian references to
+leverage Rizon’s internal motion generator to generate smooth trajectories. When using such non-real-time controls, since the waypoints are internally calculated,
+the requirements for network connection and user PC’s performance can be relaxed.</p>
+</section>
+<section id="key-features">
+<h2>Key features<a class="headerlink" href="#key-features" title="Permalink to this headline">¶</a></h2>
+<p>Below is a list of other key features in Flexiv RDK:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Integrated high-priority scheduler to run user-defined real-time tasks at 1kHz</p></li>
+<li><p>Integrated dynamics engine to run-time get important robot dynamics data like mass matrix, gravity force, Coriolis force, etc</p></li>
+<li><p>Plenty of examples covering almost every aspect of Flexiv RDK to help developers quickly get started</p></li>
+<li><p>Simple and user friendly self-contained static library that can be easily linked into any cmake projects</p></li>
+<li><p>Kinematics-only URDF and 3D mesh files of Rizon for using with visualizers (e.g. RViz) and simulators (e.g. Gazebo and pybullet)</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="2_SystemSetup.html" class="btn btn-neutral float-right" title="System Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="0_Preface.html" class="btn btn-neutral float-left" title="Preface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Flexiv.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+.. _troubleshooting:
+
+Troubleshooting
+=================
+
+This section covers common issues/faults with the robot and how to solve them.
+
+Error message
+--------------
+
+When a fault is triggered, the first thing to do is to check fault details 
+stored in ``SystemStatus::m_errorMsg``. The user can print out the error 
+message to see what type of fault (critical or minor) was triggered and 
+the reason for that.
+
+Critical fault
+---------------
+
+When the robot is in operation, its certified safety system will constantly 
+monitor the various subsystems to ensure the robot is always operating under 
+the predefined safety limits such as joint torque/position/velocity limit, 
+TCP force/position/velocity limit, robot power and momentum limit, etc. 
+Any violation to the safety limits will trigger a critical fault, also 
+known as the Category 0 Stop, or **CAT0 Stop**. In this case, the robot's main 
+drive power will be cutoff instantly and all joint brakes will engage. 
+In order to re-run the robot, the entire system must be reboot.
+
+Minor fault
+-------------
+
+Besides the critical faults triggered from the safety system, there are 
+also some minor faults that are triggered from the robot software. They are 
+often related to unreasonable user commands or invalid program workflow. Such 
+minor faults will not lead to a power cut nor system reboot, and can be cleared 
+via UI. Please refer to the user manual for detailed workflows on how to 
+clear minor faults.
+
+
+Recover from joint position limit violation
+--------------------------------------------
+
+In the **Critical Fault** section above, we mentioned that violating any of the  
+safety system limits will lead to a critical fault and requires a system reboot, 
+which solves the issue in most cases. However, there's one special case, that is 
+the violation of the joint position limit. When this happens, rebooting the system 
+won't change the fact that one or more of the joints is at a position outside the 
+allowed safe region. Therefore, after reboot, the safety system will enter a mode 
+called **Recovery Mode**, in which it requires the user to figure out a way to move the 
+violating joint(s) back into the allowed safe region.
+
+With the RDK library, the user can easily get this done by:
+
+1. Keep the mode selection switch on the motion bar at the upper position (i.e. auto mode).
+2. Reboot the system.
+3. Release E-stop as usual.
+4. Compile and run the example application ``auto_recovery`` found in ``flexiv_rdk/example``.
+5. Wait for all violating joints to move back to safe region.
+6. Press down E-stop, then do another system reboot, after which the robot can be normally operated.

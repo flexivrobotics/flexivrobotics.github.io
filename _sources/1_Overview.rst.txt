@@ -1,0 +1,115 @@
+Overview
+========
+
+This quick start guide is an integral part of your new Flexiv Rizon. With Flexiv's Robot Development Kit (RDK), developers will be able 
+to connect their own workstation PC to Rizon via Ethernet (TCP/IP) connection, and send real-time low-level commands. This enables the 
+developers to write powerful programs to operate Rizon in real time. The states and commands data between Rizon and the workstation PC 
+are exchanged at a rate of 1kHz.
+
+.. important::
+   RDK gives you full access to the robot. This means that you *cannot* issue commands through the teach pendant. 
+   Robot states, however, can still be read on the teach pendant.
+
+Robot states
+------------
+
+The available real-time robot states feedback from Rizon includes:
+
+   * Measured joint-space states: joint position, velocity, acceleration, and torque
+   * Computed Cartesian-space states: TCP pose, twist, and acceleration
+   * Estimated states: joint external torque and external wrench on TCP
+   * System status: emergency stop, digital IO, error message, etc
+ 
+User commands
+-------------
+
+To control Rizon, two types of user commands are accepted, in terms of update rate:
+ 
+1. Real-time (RT) streaming commands at 1kHz update rate, including:
+
+ * Gravity & friction compensated joint torques command
+ * Joint positions command
+ * Cartesian pose command
+
+.. important::
+   Since real-time data is streamed over the network at 1 kHz, a low-latency setup is required. Thus, a direct network connection (i.e. without switches/routers) 
+   and a workstation PC with real-time kernel is highly recommended. The setup details are covered in the subsequent sections.
+
+2. Non-real-time (NRT) commands at less than 1kHz update rate, including: 
+ 
+ * Plan execution command
+ * Primitive execution command
+ * Sparse Cartesian pose command with assistance from Rizon's internal motion generator
+ * Digital IO for controlling external devices
+
+The real-time commands can be calculated from user defined joint/Cartesian space motion generators, allowing developers to easily 
+integrate perception and other sensor modules to generate reactive motions. 
+
+As for the non-real-time commands, instead of creating a custom motion generator, developers can send plan, primitive, or relatively sparse Cartesian references to 
+leverage Rizon's internal motion generator to generate smooth trajectories. When using such non-real-time controls, since the waypoints are internally calculated, 
+the requirements for network connection and user PC's performance can be relaxed.
+
+.. RDK also provides developers with the functions to issue commands to sequence manipulation primitives. 
+.. These primitives allow highly complex motions to be executed both joint and Cartesian spaces.  
+.. Developers can also include the Flexiv Rizon robot to move to specific joint
+.. configurations, move the end effector to specific poses, command specific torques, use primitives to control the robot and monitor and control digital I/O pins on the robot
+.. control box. The Flexiv RDK is a fast and easy to use C++
+.. module for interfacing with the robot via Ethernet.
+
+Key features
+--------------
+
+Below is a list of other key features in Flexiv RDK:
+
+ * Integrated high-priority scheduler to run user-defined real-time tasks at 1kHz
+ * Integrated dynamics engine to run-time get important robot dynamics data like mass matrix, gravity force, Coriolis force, etc
+ * Plenty of examples covering almost every aspect of Flexiv RDK to help developers quickly get started
+ * Simple and user friendly self-contained static library that can be easily linked into any cmake projects
+ * Kinematics-only URDF and 3D mesh files of Rizon for using with visualizers (e.g. RViz) and simulators (e.g. Gazebo and pybullet)
+
+.. (TODO) highlight that we are providing dynamic properties
+
+.. Contents of the box
+.. -------------------
+
+.. What’s in the package:
+  
+..  * Robotic Manipulator
+
+.. * Control Box
+
+.. * Motion Bar
+
+.. * Cable for Robot-Control Box connection 
+
+.. What’s in the software package:
+
+..  * RDK documentation with Quick Start Guide
+
+..  * Flexiv RDK with examples
+
+..  * Robot Model and URDF
+
+.. .. figure:: /Images/robot_render.png
+..   :alt: robotic manipulator
+..   :width: 50.0%
+..   :align: center
+
+..   robotic manipulator
+
+.. .. figure:: /Images/robotExploded.png
+..   :alt: Exploded view of the robotic manipulator
+..   :width: 60.0%
+..   :align: center
+
+..   Exploded view of the robotic manipulator
+
+.. Important safety notice
+.. -----------------------
+
+.. The robot is partly completed machinery (see Rizon Manual) and as
+.. such a risk assessment is required for each installation of the robot.
+.. Note: you must follow all of the safety instructions in the Flexiv Rizon
+.. Manual.
+
+.. This guide is intended for trained robot developers.

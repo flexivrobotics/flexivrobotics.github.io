@@ -1,0 +1,185 @@
+System Setup
+===============
+
+This section covers the hardware and software setup required for Flexiv RDK. 
+A brief introduction is provided for the hardware subsystems of the robot, 
+followed by instructions to setup a real-time Linux (Ubuntu with RT kernel)
+
+Hardware setup
+--------------
+
+The connection between the motion bar, robot and the control box are
+described in detail in the robot's user manual. Please refer to 
+the manual for the initial setup of the robot. In order to connect 
+the user's workstation PC to the robot, Flexiv RDK must be used.
+
+.. figure:: /Images/system.png
+   :width: 100.0%
+   :align: center
+   :figclass: align-center 
+
+.. note::
+   Teach pendant is not required for using Flexiv RDK.
+
+.. important::
+   The robot must be securely mounted to the base and will not topple over even during fast motions.
+
+
+System requirements
+---------------------------
+
+This section specifies the workstation PC's requirements for running Flexiv's RDK.
+
++-----------------------------------------------------------------------------------+
+| Minimum Operating System Requirements                                             |
++----------------------+------------------------------------------------------------+
+| Operating system     | Linux Ubuntu 18.04 or 20.04 with PREEMPT_RT patched kernel |
++----------------------+------------------------------------------------------------+
+| Network card         | At least 100BASE-TX with Cat-5 cables                      |
++----------------------+------------------------------------------------------------+
+
+.. .. important::
+..   In streaming mode, the robot sends data at 1 kHz frequency. Tt is important that the user computer is configured 
+..   to minimize latencies. For example, we recommend to disable CPU frequency scaling. Other possible 
+..   optimizations will depend on your particular system.   
+
+Real-time kernel setup
+--------------------------------
+
+In order to control the robot using RDK, the controller program on the workstation PC must run as a *real-time process* under a real-time kernel. 
+We suggest the *PREEMPT_RT* kernel for this purpose due to its balance between ease of use and real-time performance.
+
+.. note::
+   There has been reports on issues with Nvidia graphics card drivers when used with *PREEMPT_RT* kernel. Please refer to Nvidia's support forums for installing a driver patch.
+
+Install dependencies:
+
+::
+
+   sudo apt install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison curl gnupg2
+
+
+A standard Ubuntu installation comes with a generic kernel, you can check the version of your kernel using ``uname -r``. It should appear as ``x.y.z`` where x, y and z are 
+the major, minor and patch digits. In the following, we assume that you are patching a Linux Ubuntu 20.04 machine with a ``5.8.0`` kernel.
+
+Real-time kernel patches are only available for select versions. Please visit `here <https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/>`_ and 
+download the patches closest to your current kernel version. We assume that the closest patch is ``5.10.41-rt42``. Using the instructions 
+from `the Linux Kernel Archives <https://www.kernel.org/signature.html>`_, run the following to download both the source and patch files:
+
+::
+
+   curl -LO https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.10.41.tar.xz
+   curl -LO https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.10.41.tar.sign
+   curl -LO https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.10.41-rt42.patch.xz
+   curl -LO https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.10.41-rt42.patch.sign  
+
+Verify the signature of the downloaded files before building and installing the new kernel. For kernel sources, this can be done with:
+
+::
+
+   gpg2 --locate-keys torvalds@kernel.org gregkh@kernel.org
+   xz -dk linux-5.10.41.tar.xz
+   gpg2 --verify linux-5.10.41.tar.sign
+
+To verify the patches, please visit `the Linux Foundation Wiki <https://wiki.linuxfoundation.org/realtime/preempt_rt_versions>`_  to 
+search for a key of the author. Next, run the following verification:
+
+::
+
+   xz -dk patch-5.10.41-rt42.patch.xz
+   gpg2 --verify patch-5.10.41-rt42.patch.sign
+
+Compile and install real-time kernel
+--------------------------------------
+Before compiling the sources, we have to apply the patches:
+
+::
+
+   tar xf linux-5.10.41.tar
+   cd linux-5.10.41
+   patch -p1 < ../patch-5.10.41-rt42.patch
+
+Next, we configure our kernel:
+
+::
+
+   make oldconfig
+
+A series of questions will pop up, you can select the default option. When asked for the Preemption Model, choose the ``Fully Preemptible Kernel``
+
+::
+
+   Preemption Model
+   1. No Forced Preemption (Server) (PREEMPT_NONE)
+   > 2. Voluntary Kernel Preemption (Desktop) (PREEMPT_VOLUNTARY)
+   3. Preemptible Kernel (Low-Latency Desktop) (PREEMPT)
+   4. Fully Preemptible Kernel (Real-Time) (PREEMPT_RT) (NEW)
+   choice[1-4?]: 4
+
+Now, we are ready to compile our new kernel:
+
+::
+
+   fakeroot make -j `getconf _NPROCESSORS_ONLN` deb-pkg
+
+
+Set user privileges to use real-time scheduling
+-------------------------------------------------
+
+To be able to schedule threads with user privileges, we will need to change the user's limits by modifying ``/etc/security/limits.conf``. 
+To do so, we create a group named *realtime* and add the user operating the robot to this group:
+
+::
+
+   sudo groupadd realtime
+   sudo usermod -aG realtime $(whoami)
+
+Next, make sure ``/etc/security/limits.conf`` contains the following:
+
+::
+
+   @realtime soft rtprio 99
+   @realtime soft priority 99
+   @realtime soft memlock 102400
+   @realtime hard rtprio 99
+   @realtime hard priority 99
+   @realtime hard memlock 102400
+
+
+Set GRUB to boot with real-time kernel
+----------------------------------------
+
+We will use grub-customizer to configure grub. To download and install, run:
+
+::
+
+   sudo add-apt-repository ppa:danielrichter2007/grub-customizer -y
+   sudo apt update -y
+   sudo apt install grub-customizer -y
+
+Simply follow the instructions in this `It's FOSS tutorial <https://itsfoss.com/grub-customizer-ubuntu/>`_ to update your grub settings.
+
+Now we can reboot the system and selected the ``PREEMPT_RT`` kernel. Once inside Ubuntu, we run ``uname -a`` on the terminal. If everything is done correctly, the terminal will 
+show a string with the ``PREEMPT_RT`` keyword.
+
+
+Optional: disable CPU speed scaling
+------------------------------------
+
+Modern CPUs are able to dynamically scale their frequency depending on operating conditions. In some cases, this can lead to uneven processing speed 
+that in turn interrupts execution. These fluctuations in processing speed can affect the overall performance of the real-time processes.
+
+To disable speed scaling, we will use ``cpufrequtils`` to disable power saving mode
+
+::
+
+   sudo apt install cpufrequtils
+
+Running ``cpufreq-info`` shows you the available cpufreq governors. The standard setting is ``performance, powersave``. We will switch all governers to ``performance``:
+
+::
+
+   sudo systemctl disable ondemand
+   sudo systemctl enable cpufrequtils
+   sudo sh -c 'echo "GOVERNOR=performance" > /etc/default/cpufrequtils'
+   sudo systemctl daemon-reload && sudo systemctl restart cpufrequtils

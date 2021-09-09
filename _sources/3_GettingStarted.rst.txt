@@ -1,0 +1,130 @@
+Getting Started
+====================
+
+.. (TODO) add instruction to configure license
+.. (TODO) add instruction to configure external mode on UI
+
+This section covers how to establish connection between the robot and the user's workstation PC, 
+and run some examples to verify system functionalities. 
+
+Establish connection
+--------------------
+
+The following steps show how to physically connect user's workstation PC to the robot:
+
+1. Make sure the system is powered **OFF** and the robot arm is mounted on a stable base. The robot must be securely mounted 
+onto a steady base and cannot topple over even when the robot is moving at high speeds with sudden stops.
+
+2. Using an Ethernet cable, connect the Ethernet port on the workstation PC to the Ethernet port on the control box that is marked as LAN. 
+Ensure that connectors are firmly attached.
+
+   .. figure:: /Images/ioFullPanel.png
+      :width: 75.0%
+      :align: center
+      :figclass: align-center   
+
+   .. figure:: /Images/ioFullPanelDetails.png
+      :width: 75.0%
+      :align: center
+      :figclass: align-center   
+      
+   .. important::
+      The connection between the robot and the workstation PC should be a direct connection. Going through a 
+      router or an ethernet switch can result in reduced control performance due to extra network latency.
+
+3. With the system powered **OFF**, push the **mode selection switch** on the motion bar to upper position (i.e. **auto mode**).
+
+   .. note::
+      Refer to the user manual for more details about **auto mode** and **manual mode**. Here we'll need 
+      to use auto mode for RDK.
+
+   .. figure:: /Images/MotionBar_Image.png
+      :width: 70.0%
+      :align: center
+      :figclass: align-center
+
+4. Check that the **emergency stop** (E-stop) on the motion bar is pressed down.
+
+5. Power **ON** the system using the power switch located on the control box, then wait until booting is complete. 
+   The LED rings on the robot will turn solid **blue** when the robot is ready. This process may take up to 60 seconds.
+
+   .. caution::
+      **Blinking** LED rings on the robot indicate a fault occurred. Please refer to the Troubleshooting section for more details.
+
+6. The default IP address of the robot is ``192.168.2.100``. By this time the connection should already have been established, 
+   so check the connection by pinging the robot from the workstation PC::
+
+      ping 192.168.2.100
+
+   The *time* value from the ping command denotes the round trip time and this value should be well below ``1 ms``
+
+   .. note::
+      The workstation PC must be in the same subnet (i.e. with IP address ``192.168.2.x``) with the robot in order to connect. 
+      However, the user does NOT need to configure the workstation PC's IP address manually, because the robot has its own DHCP 
+      server built in. So when the robot finishes booting with the workstation PC is connected, the 
+      DHCP server will automatically assign an IP address in the same subnet to the workstation PC.
+
+
+Build and run examples
+-----------------------
+
+Now that the connection is established, we'll need to enable the robot and verify the whole setup by running the ``display_robot_states`` 
+example, which will enable the robot then continuously get and print the current states of the robot while the robot holds itself at the current pose.
+
+.. Will assume that license is not ready and that we will be providing the zip examples
+
+1. Unzip the RDK library package provided by Flexiv.
+
+2. Configure CMake::
+
+      cd flexiv_rdk
+      mkdir build && cd build
+      cmake ..
+
+3. Check the IP address of the workstation PC itself::
+      
+      sudo apt install net-tools
+      ifconfig
+
+   You should see that one of the network drivers has been assigned by the robot an IP address within the same subnet as the robot, aka ``192.168.2.x``.
+
+4. Update ``LOCAL_IP`` in ``flexiv_rdk/include/config.h`` with this IP address of the workstation PC.
+
+5. Build examples::
+
+      cd flexiv_rdk/build
+      make -j4
+
+6. Assuming the robot has already finished booting and the connection with the user's workstation PC is established according to instructions 
+   mentioned above, now release (**pull up**) the emergency stop (E-stop) button on the motion bar. The robot will have no action because 
+   there's still one more step to actually enable the robot.
+
+7. Run the compiled example program ``display_robot_states``, which will first call an API to actually enable the robot, make sure the E-stop is 
+   already pulled up:: 
+
+      cd flexiv_rdk/build/example
+      sudo ./display_robot_states
+
+8. The robot will get enabled and release the brakes, which will make some audible crispy sound. After a few seconds when the enabling process is done and the robot 
+   becomes operational, the 1kHz periodic user task loop will start to run, which in this example mainly prints the joint and Cartesian states of the robot. 
+   An excerpt of the output is as follows:
+
+   .. code-block:: c
+
+      "q" : [0.00000  -0.69813  0.00000  1.57079  0.00001  0.69813  -0.00000],
+      "dq" : [0.00124  -0.00159  0.00932  -0.0124  -0.00246  0.00245  0.00492],
+      "tau_J": [0.00000  48.12248  1.09559  -20.00126  -2.15257  2.42971  -0.00000],
+      "tau_J_ext": [2.01001  -10.02002  2.04536  23.23102  -9.23158  -5.61123  -4.23160],
+      "tcp_pose": [0.68701  -0.11000  0.29358  0.00000  0.00000  1.00000  0.00000],
+      "tcp_vel": [0.20001  0.30000  0.10002  0.02000  -0.03003  0.00210],
+      "tcp_acc": [0.00100  0.00030  0.00200  0.01000  0.00400  0.00050],
+      "tcp_wrench": [3.02003  -2.20300  1.00040  0.03030  3.10000  0.50020]
+
+
+9. Use ``CTRL+C`` to close the example program. 
+
+   .. note::
+      When the RDK user program is terminated or the connection is lost, the robot will automatically decelerate to a halt and hold its position.
+
+The next section will provide more details on the RDK library, and you can also check out the other 
+examples to get familiar with RDK APIs and how to use them.

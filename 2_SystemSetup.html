@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>System Setup &mdash; Flexiv RDK 0.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Started" href="3_GettingStarted.html" />
+    <link rel="prev" title="Overview" href="1_Overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Flexiv RDK
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="0_Preface.html">Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_Overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">System Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-setup">Hardware setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-requirements">System requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#real-time-kernel-setup">Real-time kernel setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compile-and-install-real-time-kernel">Compile and install real-time kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-user-privileges-to-use-real-time-scheduling">Set user privileges to use real-time scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-grub-to-boot-with-real-time-kernel">Set GRUB to boot with real-time kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-disable-cpu-speed-scaling">Optional: disable CPU speed scaling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="3_GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_RdkLibrary.html">RDK Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_Primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_Troubleshooting.html">Troubleshooting</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Flexiv RDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>System Setup</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/2_SystemSetup.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="system-setup">
+<h1>System Setup<a class="headerlink" href="#system-setup" title="Permalink to this headline">¶</a></h1>
+<p>This section covers the hardware and software setup required for Flexiv RDK.
+A brief introduction is provided for the hardware subsystems of the robot,
+followed by instructions to setup a real-time Linux (Ubuntu with RT kernel)</p>
+<section id="hardware-setup">
+<h2>Hardware setup<a class="headerlink" href="#hardware-setup" title="Permalink to this headline">¶</a></h2>
+<p>The connection between the motion bar, robot and the control box are
+described in detail in the robot’s user manual. Please refer to
+the manual for the initial setup of the robot. In order to connect
+the user’s workstation PC to the robot, Flexiv RDK must be used.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/system.png"><img alt="_images/system.png" src="_images/system.png" style="width: 100.0%;" /></a>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Teach pendant is not required for using Flexiv RDK.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The robot must be securely mounted to the base and will not topple over even during fast motions.</p>
+</div>
+</section>
+<section id="system-requirements">
+<h2>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
+<p>This section specifies the workstation PC’s requirements for running Flexiv’s RDK.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 73%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="2"><p>Minimum Operating System Requirements</p></td>
+</tr>
+<tr class="row-even"><td><p>Operating system</p></td>
+<td><p>Linux Ubuntu 18.04 or 20.04 with PREEMPT_RT patched kernel</p></td>
+</tr>
+<tr class="row-odd"><td><p>Network card</p></td>
+<td><p>At least 100BASE-TX with Cat-5 cables</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="real-time-kernel-setup">
+<h2>Real-time kernel setup<a class="headerlink" href="#real-time-kernel-setup" title="Permalink to this headline">¶</a></h2>
+<p>In order to control the robot using RDK, the controller program on the workstation PC must run as a <em>real-time process</em> under a real-time kernel.
+We suggest the <em>PREEMPT_RT</em> kernel for this purpose due to its balance between ease of use and real-time performance.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There has been reports on issues with Nvidia graphics card drivers when used with <em>PREEMPT_RT</em> kernel. Please refer to Nvidia’s support forums for installing a driver patch.</p>
+</div>
+<p>Install dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">git</span> <span class="n">fakeroot</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">ncurses</span><span class="o">-</span><span class="n">dev</span> <span class="n">xz</span><span class="o">-</span><span class="n">utils</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">bc</span> <span class="n">flex</span> <span class="n">libelf</span><span class="o">-</span><span class="n">dev</span> <span class="n">bison</span> <span class="n">curl</span> <span class="n">gnupg2</span>
+</pre></div>
+</div>
+<p>A standard Ubuntu installation comes with a generic kernel, you can check the version of your kernel using <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-r</span></code>. It should appear as <code class="docutils literal notranslate"><span class="pre">x.y.z</span></code> where x, y and z are
+the major, minor and patch digits. In the following, we assume that you are patching a Linux Ubuntu 20.04 machine with a <code class="docutils literal notranslate"><span class="pre">5.8.0</span></code> kernel.</p>
+<p>Real-time kernel patches are only available for select versions. Please visit <a class="reference external" href="https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/">here</a> and
+download the patches closest to your current kernel version. We assume that the closest patch is <code class="docutils literal notranslate"><span class="pre">5.10.41-rt42</span></code>. Using the instructions
+from <a class="reference external" href="https://www.kernel.org/signature.html">the Linux Kernel Archives</a>, run the following to download both the source and patch files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">v5</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="mf">5.10.41</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">xz</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">v5</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="mf">5.10.41</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">sign</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">rt</span><span class="o">/</span><span class="mf">5.9</span><span class="o">/</span><span class="n">patch</span><span class="o">-</span><span class="mf">5.10.41</span><span class="o">-</span><span class="n">rt42</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">xz</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">rt</span><span class="o">/</span><span class="mf">5.9</span><span class="o">/</span><span class="n">patch</span><span class="o">-</span><span class="mf">5.10.41</span><span class="o">-</span><span class="n">rt42</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">sign</span>
+</pre></div>
+</div>
+<p>Verify the signature of the downloaded files before building and installing the new kernel. For kernel sources, this can be done with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpg2</span> <span class="o">--</span><span class="n">locate</span><span class="o">-</span><span class="n">keys</span> <span class="n">torvalds</span><span class="nd">@kernel</span><span class="o">.</span><span class="n">org</span> <span class="n">gregkh</span><span class="nd">@kernel</span><span class="o">.</span><span class="n">org</span>
+<span class="n">xz</span> <span class="o">-</span><span class="n">dk</span> <span class="n">linux</span><span class="o">-</span><span class="mf">5.10.41</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">xz</span>
+<span class="n">gpg2</span> <span class="o">--</span><span class="n">verify</span> <span class="n">linux</span><span class="o">-</span><span class="mf">5.10.41</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">sign</span>
+</pre></div>
+</div>
+<p>To verify the patches, please visit <a class="reference external" href="https://wiki.linuxfoundation.org/realtime/preempt_rt_versions">the Linux Foundation Wiki</a>  to
+search for a key of the author. Next, run the following verification:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xz</span> <span class="o">-</span><span class="n">dk</span> <span class="n">patch</span><span class="o">-</span><span class="mf">5.10.41</span><span class="o">-</span><span class="n">rt42</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">xz</span>
+<span class="n">gpg2</span> <span class="o">--</span><span class="n">verify</span> <span class="n">patch</span><span class="o">-</span><span class="mf">5.10.41</span><span class="o">-</span><span class="n">rt42</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">sign</span>
+</pre></div>
+</div>
+</section>
+<section id="compile-and-install-real-time-kernel">
+<h2>Compile and install real-time kernel<a class="headerlink" href="#compile-and-install-real-time-kernel" title="Permalink to this headline">¶</a></h2>
+<p>Before compiling the sources, we have to apply the patches:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tar</span> <span class="n">xf</span> <span class="n">linux</span><span class="o">-</span><span class="mf">5.10.41</span><span class="o">.</span><span class="n">tar</span>
+<span class="n">cd</span> <span class="n">linux</span><span class="o">-</span><span class="mf">5.10.41</span>
+<span class="n">patch</span> <span class="o">-</span><span class="n">p1</span> <span class="o">&lt;</span> <span class="o">../</span><span class="n">patch</span><span class="o">-</span><span class="mf">5.10.41</span><span class="o">-</span><span class="n">rt42</span><span class="o">.</span><span class="n">patch</span>
+</pre></div>
+</div>
+<p>Next, we configure our kernel:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">oldconfig</span>
+</pre></div>
+</div>
+<p>A series of questions will pop up, you can select the default option. When asked for the Preemption Model, choose the <code class="docutils literal notranslate"><span class="pre">Fully</span> <span class="pre">Preemptible</span> <span class="pre">Kernel</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Preemption Model
+1. No Forced Preemption (Server) (PREEMPT_NONE)
+&gt; 2. Voluntary Kernel Preemption (Desktop) (PREEMPT_VOLUNTARY)
+3. Preemptible Kernel (Low-Latency Desktop) (PREEMPT)
+4. Fully Preemptible Kernel (Real-Time) (PREEMPT_RT) (NEW)
+choice[1-4?]: 4
+</pre></div>
+</div>
+<p>Now, we are ready to compile our new kernel:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>fakeroot make -j `getconf _NPROCESSORS_ONLN` deb-pkg
+</pre></div>
+</div>
+</section>
+<section id="set-user-privileges-to-use-real-time-scheduling">
+<h2>Set user privileges to use real-time scheduling<a class="headerlink" href="#set-user-privileges-to-use-real-time-scheduling" title="Permalink to this headline">¶</a></h2>
+<p>To be able to schedule threads with user privileges, we will need to change the user’s limits by modifying <code class="docutils literal notranslate"><span class="pre">/etc/security/limits.conf</span></code>.
+To do so, we create a group named <em>realtime</em> and add the user operating the robot to this group:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo groupadd realtime
+sudo usermod -aG realtime $(whoami)
+</pre></div>
+</div>
+<p>Next, make sure <code class="docutils literal notranslate"><span class="pre">/etc/security/limits.conf</span></code> contains the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@realtime</span> <span class="n">soft</span> <span class="n">rtprio</span> <span class="mi">99</span>
+<span class="nd">@realtime</span> <span class="n">soft</span> <span class="n">priority</span> <span class="mi">99</span>
+<span class="nd">@realtime</span> <span class="n">soft</span> <span class="n">memlock</span> <span class="mi">102400</span>
+<span class="nd">@realtime</span> <span class="n">hard</span> <span class="n">rtprio</span> <span class="mi">99</span>
+<span class="nd">@realtime</span> <span class="n">hard</span> <span class="n">priority</span> <span class="mi">99</span>
+<span class="nd">@realtime</span> <span class="n">hard</span> <span class="n">memlock</span> <span class="mi">102400</span>
+</pre></div>
+</div>
+</section>
+<section id="set-grub-to-boot-with-real-time-kernel">
+<h2>Set GRUB to boot with real-time kernel<a class="headerlink" href="#set-grub-to-boot-with-real-time-kernel" title="Permalink to this headline">¶</a></h2>
+<p>We will use grub-customizer to configure grub. To download and install, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">danielrichter2007</span><span class="o">/</span><span class="n">grub</span><span class="o">-</span><span class="n">customizer</span> <span class="o">-</span><span class="n">y</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span> <span class="o">-</span><span class="n">y</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">grub</span><span class="o">-</span><span class="n">customizer</span> <span class="o">-</span><span class="n">y</span>
+</pre></div>
+</div>
+<p>Simply follow the instructions in this <a class="reference external" href="https://itsfoss.com/grub-customizer-ubuntu/">It’s FOSS tutorial</a> to update your grub settings.</p>
+<p>Now we can reboot the system and selected the <code class="docutils literal notranslate"><span class="pre">PREEMPT_RT</span></code> kernel. Once inside Ubuntu, we run <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-a</span></code> on the terminal. If everything is done correctly, the terminal will
+show a string with the <code class="docutils literal notranslate"><span class="pre">PREEMPT_RT</span></code> keyword.</p>
+</section>
+<section id="optional-disable-cpu-speed-scaling">
+<h2>Optional: disable CPU speed scaling<a class="headerlink" href="#optional-disable-cpu-speed-scaling" title="Permalink to this headline">¶</a></h2>
+<p>Modern CPUs are able to dynamically scale their frequency depending on operating conditions. In some cases, this can lead to uneven processing speed
+that in turn interrupts execution. These fluctuations in processing speed can affect the overall performance of the real-time processes.</p>
+<p>To disable speed scaling, we will use <code class="docutils literal notranslate"><span class="pre">cpufrequtils</span></code> to disable power saving mode</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">cpufrequtils</span>
+</pre></div>
+</div>
+<p>Running <code class="docutils literal notranslate"><span class="pre">cpufreq-info</span></code> shows you the available cpufreq governors. The standard setting is <code class="docutils literal notranslate"><span class="pre">performance,</span> <span class="pre">powersave</span></code>. We will switch all governers to <code class="docutils literal notranslate"><span class="pre">performance</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">disable</span> <span class="n">ondemand</span>
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">enable</span> <span class="n">cpufrequtils</span>
+<span class="n">sudo</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;echo &quot;GOVERNOR=performance&quot; &gt; /etc/default/cpufrequtils&#39;</span>
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">restart</span> <span class="n">cpufrequtils</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="3_GettingStarted.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="1_Overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Flexiv.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
