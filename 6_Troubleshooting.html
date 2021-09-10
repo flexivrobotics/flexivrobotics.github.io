@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Troubleshooting &mdash; Flexiv RDK 0.2.0 documentation</title>
@@ -171,17 +170,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="troubleshooting">
+  <div class="section" id="troubleshooting">
 <span id="id1"></span><h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
 <p>This section covers common issues/faults with the robot and how to solve them.</p>
-<section id="error-message">
+<div class="section" id="error-message">
 <h2>Error message<a class="headerlink" href="#error-message" title="Permalink to this headline">¶</a></h2>
 <p>When a fault is triggered, the first thing to do is to check fault details
 stored in <code class="docutils literal notranslate"><span class="pre">SystemStatus::m_errorMsg</span></code>. The user can print out the error
 message to see what type of fault (critical or minor) was triggered and
 the reason for that.</p>
-</section>
-<section id="critical-fault">
+</div>
+<div class="section" id="critical-fault">
 <h2>Critical fault<a class="headerlink" href="#critical-fault" title="Permalink to this headline">¶</a></h2>
 <p>When the robot is in operation, its certified safety system will constantly
 monitor the various subsystems to ensure the robot is always operating under
@@ -191,8 +190,8 @@ Any violation to the safety limits will trigger a critical fault, also
 known as the Category 0 Stop, or <strong>CAT0 Stop</strong>. In this case, the robot’s main
 drive power will be cutoff instantly and all joint brakes will engage.
 In order to re-run the robot, the entire system must be reboot.</p>
-</section>
-<section id="minor-fault">
+</div>
+<div class="section" id="minor-fault">
 <h2>Minor fault<a class="headerlink" href="#minor-fault" title="Permalink to this headline">¶</a></h2>
 <p>Besides the critical faults triggered from the safety system, there are
 also some minor faults that are triggered from the robot software. They are
@@ -200,8 +199,8 @@ often related to unreasonable user commands or invalid program workflow. Such
 minor faults will not lead to a power cut nor system reboot, and can be cleared
 via UI. Please refer to the user manual for detailed workflows on how to
 clear minor faults.</p>
-</section>
-<section id="recover-from-joint-position-limit-violation">
+</div>
+<div class="section" id="recover-from-joint-position-limit-violation">
 <h2>Recover from joint position limit violation<a class="headerlink" href="#recover-from-joint-position-limit-violation" title="Permalink to this headline">¶</a></h2>
 <p>In the <strong>Critical Fault</strong> section above, we mentioned that violating any of the
 safety system limits will lead to a critical fault and requires a system reboot,
@@ -220,8 +219,8 @@ violating joint(s) back into the allowed safe region.</p>
 <li><p>Wait for all violating joints to move back to safe region.</p></li>
 <li><p>Press down E-stop, then do another system reboot, after which the robot can be normally operated.</p></li>
 </ol>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

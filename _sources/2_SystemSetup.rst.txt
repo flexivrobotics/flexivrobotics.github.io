@@ -56,7 +56,7 @@ Install dependencies:
 
 ::
 
-   sudo apt install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison curl gnupg2
+   sudo apt install -y git fakeroot build-essential cmake ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison curl gnupg2
 
 
 A standard Ubuntu installation comes with a generic kernel, you can check the version of your kernel using ``uname -r``. It should appear as ``x.y.z`` where x, y and z are 

@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Overview &mdash; Flexiv RDK 0.2.0 documentation</title>
@@ -171,7 +170,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="overview">
+  <div class="section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
 <p>This quick start guide is an integral part of your new Flexiv Rizon. With Flexiv’s Robot Development Kit (RDK), developers will be able
 to connect their own workstation PC to Rizon via Ethernet (TCP/IP) connection, and send real-time low-level commands. This enables the
@@ -182,19 +181,19 @@ are exchanged at a rate of 1kHz.</p>
 <p>RDK gives you full access to the robot. This means that you <em>cannot</em> issue commands through the teach pendant.
 Robot states, however, can still be read on the teach pendant.</p>
 </div>
-<section id="robot-states">
+<div class="section" id="robot-states">
 <h2>Robot states<a class="headerlink" href="#robot-states" title="Permalink to this headline">¶</a></h2>
 <p>The available real-time robot states feedback from Rizon includes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Measured joint-space states: joint position, velocity, acceleration, and torque</p></li>
-<li><p>Computed Cartesian-space states: TCP pose, twist, and acceleration</p></li>
+<li><p>Measured joint-space states: joint position, velocity, and torque</p></li>
+<li><p>Computed Cartesian-space states: TCP pose, velocity, and acceleration</p></li>
 <li><p>Estimated states: joint external torque and external wrench on TCP</p></li>
 <li><p>System status: emergency stop, digital IO, error message, etc</p></li>
 </ul>
 </div></blockquote>
-</section>
-<section id="user-commands">
+</div>
+<div class="section" id="user-commands">
 <h2>User commands<a class="headerlink" href="#user-commands" title="Permalink to this headline">¶</a></h2>
 <p>To control Rizon, two types of user commands are accepted, in terms of update rate:</p>
 <ol class="arabic simple">
@@ -213,14 +212,14 @@ Robot states, however, can still be read on the teach pendant.</p>
 and a workstation PC with real-time kernel is highly recommended. The setup details are covered in the subsequent sections.</p>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>Non-real-time (NRT) commands at less than 1kHz update rate, including:</p></li>
+<li><p>Non-real-time (NRT) commands, including:</p></li>
 </ol>
 <blockquote>
 <div><ul class="simple">
 <li><p>Plan execution command</p></li>
 <li><p>Primitive execution command</p></li>
-<li><p>Sparse Cartesian pose command with assistance from Rizon’s internal motion generator</p></li>
-<li><p>Digital IO for controlling external devices</p></li>
+<li><p>Digital IO command for controlling external devices</p></li>
+<li><p>Other auxiliary commands like enable, start, stop, auto-recovery, etc</p></li>
 </ul>
 </div></blockquote>
 <p>The real-time commands can be calculated from user defined joint/Cartesian space motion generators, allowing developers to easily
@@ -228,8 +227,8 @@ integrate perception and other sensor modules to generate reactive motions.</p>
 <p>As for the non-real-time commands, instead of creating a custom motion generator, developers can send plan, primitive, or relatively sparse Cartesian references to
 leverage Rizon’s internal motion generator to generate smooth trajectories. When using such non-real-time controls, since the waypoints are internally calculated,
 the requirements for network connection and user PC’s performance can be relaxed.</p>
-</section>
-<section id="key-features">
+</div>
+<div class="section" id="key-features">
 <h2>Key features<a class="headerlink" href="#key-features" title="Permalink to this headline">¶</a></h2>
 <p>Below is a list of other key features in Flexiv RDK:</p>
 <blockquote>
@@ -241,8 +240,8 @@ the requirements for network connection and user PC’s performance can be relax
 <li><p>Kinematics-only URDF and 3D mesh files of Rizon for using with visualizers (e.g. RViz) and simulators (e.g. Gazebo and pybullet)</p></li>
 </ul>
 </div></blockquote>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>System Setup &mdash; Flexiv RDK 0.2.0 documentation</title>
@@ -175,20 +174,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="system-setup">
+  <div class="section" id="system-setup">
 <h1>System Setup<a class="headerlink" href="#system-setup" title="Permalink to this headline">¶</a></h1>
 <p>This section covers the hardware and software setup required for Flexiv RDK.
 A brief introduction is provided for the hardware subsystems of the robot,
 followed by instructions to setup a real-time Linux (Ubuntu with RT kernel)</p>
-<section id="hardware-setup">
+<div class="section" id="hardware-setup">
 <h2>Hardware setup<a class="headerlink" href="#hardware-setup" title="Permalink to this headline">¶</a></h2>
 <p>The connection between the motion bar, robot and the control box are
 described in detail in the robot’s user manual. Please refer to
 the manual for the initial setup of the robot. In order to connect
 the user’s workstation PC to the robot, Flexiv RDK must be used.</p>
-<figure class="align-center">
+<div class="align-center figure">
 <a class="reference internal image-reference" href="_images/system.png"><img alt="_images/system.png" src="_images/system.png" style="width: 100.0%;" /></a>
-</figure>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Teach pendant is not required for using Flexiv RDK.</p>
@@ -197,8 +196,8 @@ the user’s workstation PC to the robot, Flexiv RDK must be used.</p>
 <p class="admonition-title">Important</p>
 <p>The robot must be securely mounted to the base and will not topple over even during fast motions.</p>
 </div>
-</section>
-<section id="system-requirements">
+</div>
+<div class="section" id="system-requirements">
 <h2>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
 <p>This section specifies the workstation PC’s requirements for running Flexiv’s RDK.</p>
 <table class="docutils align-default">
@@ -217,8 +216,8 @@ the user’s workstation PC to the robot, Flexiv RDK must be used.</p>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="real-time-kernel-setup">
+</div>
+<div class="section" id="real-time-kernel-setup">
 <h2>Real-time kernel setup<a class="headerlink" href="#real-time-kernel-setup" title="Permalink to this headline">¶</a></h2>
 <p>In order to control the robot using RDK, the controller program on the workstation PC must run as a <em>real-time process</em> under a real-time kernel.
 We suggest the <em>PREEMPT_RT</em> kernel for this purpose due to its balance between ease of use and real-time performance.</p>
@@ -227,7 +226,7 @@ We suggest the <em>PREEMPT_RT</em> kernel for this purpose due to its balance be
 <p>There has been reports on issues with Nvidia graphics card drivers when used with <em>PREEMPT_RT</em> kernel. Please refer to Nvidia’s support forums for installing a driver patch.</p>
 </div>
 <p>Install dependencies:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">git</span> <span class="n">fakeroot</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">ncurses</span><span class="o">-</span><span class="n">dev</span> <span class="n">xz</span><span class="o">-</span><span class="n">utils</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">bc</span> <span class="n">flex</span> <span class="n">libelf</span><span class="o">-</span><span class="n">dev</span> <span class="n">bison</span> <span class="n">curl</span> <span class="n">gnupg2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">git</span> <span class="n">fakeroot</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">cmake</span> <span class="n">ncurses</span><span class="o">-</span><span class="n">dev</span> <span class="n">xz</span><span class="o">-</span><span class="n">utils</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">bc</span> <span class="n">flex</span> <span class="n">libelf</span><span class="o">-</span><span class="n">dev</span> <span class="n">bison</span> <span class="n">curl</span> <span class="n">gnupg2</span>
 </pre></div>
 </div>
 <p>A standard Ubuntu installation comes with a generic kernel, you can check the version of your kernel using <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-r</span></code>. It should appear as <code class="docutils literal notranslate"><span class="pre">x.y.z</span></code> where x, y and z are
@@ -253,8 +252,8 @@ search for a key of the author. Next, run the following verification:</p>
 <span class="n">gpg2</span> <span class="o">--</span><span class="n">verify</span> <span class="n">patch</span><span class="o">-</span><span class="mf">5.10.41</span><span class="o">-</span><span class="n">rt42</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">sign</span>
 </pre></div>
 </div>
-</section>
-<section id="compile-and-install-real-time-kernel">
+</div>
+<div class="section" id="compile-and-install-real-time-kernel">
 <h2>Compile and install real-time kernel<a class="headerlink" href="#compile-and-install-real-time-kernel" title="Permalink to this headline">¶</a></h2>
 <p>Before compiling the sources, we have to apply the patches:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tar</span> <span class="n">xf</span> <span class="n">linux</span><span class="o">-</span><span class="mf">5.10.41</span><span class="o">.</span><span class="n">tar</span>
@@ -279,8 +278,8 @@ choice[1-4?]: 4
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>fakeroot make -j `getconf _NPROCESSORS_ONLN` deb-pkg
 </pre></div>
 </div>
-</section>
-<section id="set-user-privileges-to-use-real-time-scheduling">
+</div>
+<div class="section" id="set-user-privileges-to-use-real-time-scheduling">
 <h2>Set user privileges to use real-time scheduling<a class="headerlink" href="#set-user-privileges-to-use-real-time-scheduling" title="Permalink to this headline">¶</a></h2>
 <p>To be able to schedule threads with user privileges, we will need to change the user’s limits by modifying <code class="docutils literal notranslate"><span class="pre">/etc/security/limits.conf</span></code>.
 To do so, we create a group named <em>realtime</em> and add the user operating the robot to this group:</p>
@@ -297,8 +296,8 @@ sudo usermod -aG realtime $(whoami)
 <span class="nd">@realtime</span> <span class="n">hard</span> <span class="n">memlock</span> <span class="mi">102400</span>
 </pre></div>
 </div>
-</section>
-<section id="set-grub-to-boot-with-real-time-kernel">
+</div>
+<div class="section" id="set-grub-to-boot-with-real-time-kernel">
 <h2>Set GRUB to boot with real-time kernel<a class="headerlink" href="#set-grub-to-boot-with-real-time-kernel" title="Permalink to this headline">¶</a></h2>
 <p>We will use grub-customizer to configure grub. To download and install, run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">danielrichter2007</span><span class="o">/</span><span class="n">grub</span><span class="o">-</span><span class="n">customizer</span> <span class="o">-</span><span class="n">y</span>
@@ -309,8 +308,8 @@ sudo usermod -aG realtime $(whoami)
 <p>Simply follow the instructions in this <a class="reference external" href="https://itsfoss.com/grub-customizer-ubuntu/">It’s FOSS tutorial</a> to update your grub settings.</p>
 <p>Now we can reboot the system and selected the <code class="docutils literal notranslate"><span class="pre">PREEMPT_RT</span></code> kernel. Once inside Ubuntu, we run <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-a</span></code> on the terminal. If everything is done correctly, the terminal will
 show a string with the <code class="docutils literal notranslate"><span class="pre">PREEMPT_RT</span></code> keyword.</p>
-</section>
-<section id="optional-disable-cpu-speed-scaling">
+</div>
+<div class="section" id="optional-disable-cpu-speed-scaling">
 <h2>Optional: disable CPU speed scaling<a class="headerlink" href="#optional-disable-cpu-speed-scaling" title="Permalink to this headline">¶</a></h2>
 <p>Modern CPUs are able to dynamically scale their frequency depending on operating conditions. In some cases, this can lead to uneven processing speed
 that in turn interrupts execution. These fluctuations in processing speed can affect the overall performance of the real-time processes.</p>
@@ -325,8 +324,8 @@ that in turn interrupts execution. These fluctuations in processing speed can af
 <span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">restart</span> <span class="n">cpufrequtils</span>
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

@@ -15,8 +15,8 @@ Robot states
 
 The available real-time robot states feedback from Rizon includes:
 
-   * Measured joint-space states: joint position, velocity, acceleration, and torque
-   * Computed Cartesian-space states: TCP pose, twist, and acceleration
+   * Measured joint-space states: joint position, velocity, and torque
+   * Computed Cartesian-space states: TCP pose, velocity, and acceleration
    * Estimated states: joint external torque and external wrench on TCP
    * System status: emergency stop, digital IO, error message, etc
  
@@ -35,12 +35,12 @@ To control Rizon, two types of user commands are accepted, in terms of update ra
    Since real-time data is streamed over the network at 1 kHz, a low-latency setup is required. Thus, a direct network connection (i.e. without switches/routers) 
    and a workstation PC with real-time kernel is highly recommended. The setup details are covered in the subsequent sections.
 
-2. Non-real-time (NRT) commands at less than 1kHz update rate, including: 
+2. Non-real-time (NRT) commands, including: 
  
  * Plan execution command
  * Primitive execution command
- * Sparse Cartesian pose command with assistance from Rizon's internal motion generator
- * Digital IO for controlling external devices
+ * Digital IO command for controlling external devices
+ * Other auxiliary commands like enable, start, stop, auto-recovery, etc
 
 The real-time commands can be calculated from user defined joint/Cartesian space motion generators, allowing developers to easily 
 integrate perception and other sensor modules to generate reactive motions. 

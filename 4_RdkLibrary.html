@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>RDK Library &mdash; Flexiv RDK 0.2.0 documentation</title>
@@ -188,18 +187,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="rdk-library">
+  <div class="section" id="rdk-library">
 <h1>RDK Library<a class="headerlink" href="#rdk-library" title="Permalink to this headline">¶</a></h1>
 <p>The Flexiv RDK library allows the robot to be monitored and controlled
 by developers via Ethernet connection. Developers have real-time access to
 the states data from the robot. Control commands can be sent to the robot and get
 executed at a rate of up to 1000 Hz.</p>
-<section id="api-documentation">
+<div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>To get a complete view of APIs in the RDK library, please refer to the
 <a class="reference external" href="https://flexivrobotics.github.io/flexiv_rdk/">Doxygen generated API documentation</a>.</p>
-</section>
-<section id="library-files">
+</div>
+<div class="section" id="library-files">
 <h2>Library files<a class="headerlink" href="#library-files" title="Permalink to this headline">¶</a></h2>
 <p>Below is the file structure of the library:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>flexiv_rdk
@@ -245,8 +244,8 @@ executed at a rate of up to 1000 Hz.</p>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="robot-modes">
+</div>
+<div class="section" id="robot-modes">
 <h2>Robot modes<a class="headerlink" href="#robot-modes" title="Permalink to this headline">¶</a></h2>
 <p>The robot can be put into different modes to take different kind of commands. Most motion APIs require the
 user to put the robot into a corresponding mode before sending actual control commands. Available modes can
@@ -283,71 +282,71 @@ The type of each mode is shown below:</p>
 </tr>
 </tbody>
 </table>
-<section id="idle-mode">
+<div class="section" id="idle-mode">
 <h3>Idle mode<a class="headerlink" href="#idle-mode" title="Permalink to this headline">¶</a></h3>
 <p>The robot holds it’s current position while waiting for user command. The corresponding enum of this mode
 is <code class="docutils literal notranslate"><span class="pre">flexiv::MODE_IDLE</span></code>.</p>
-</section>
-<section id="real-time-modes">
+</div>
+<div class="section" id="real-time-modes">
 <h3>Real-time modes<a class="headerlink" href="#real-time-modes" title="Permalink to this headline">¶</a></h3>
 <p>When the robot is in real-time modes, user commands will be executed right away without excessive processing
 or filtering to ensure the control loop is at 1kHz.</p>
-<section id="joint-position-mode">
+<div class="section" id="joint-position-mode">
 <h4>Joint position mode<a class="headerlink" href="#joint-position-mode" title="Permalink to this headline">¶</a></h4>
 <p>The robot accepts and executes joint position commands streamed at 1kHz.
 The corresponding enum of this mode is <code class="docutils literal notranslate"><span class="pre">flexiv::MODE_JOINT_POSITION</span></code>,
 and the command can be sent to the robot using <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::streamJointPosition()</span></code>.</p>
-</section>
-<section id="joint-torque-mode">
+</div>
+<div class="section" id="joint-torque-mode">
 <h4>Joint torque mode<a class="headerlink" href="#joint-torque-mode" title="Permalink to this headline">¶</a></h4>
 <p>The robot accepts and executes joint torque commands streamed at 1kHz.
 The corresponding enum of this mode is <code class="docutils literal notranslate"><span class="pre">flexiv::MODE_JOINT_TORQUE</span></code>,
 and the command can be sent to the robot using <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::streamJointTorque()</span></code>.</p>
-</section>
-<section id="cartesian-impedance-mode">
+</div>
+<div class="section" id="cartesian-impedance-mode">
 <h4>Cartesian impedance mode<a class="headerlink" href="#cartesian-impedance-mode" title="Permalink to this headline">¶</a></h4>
 <p>The robot accepts Cartesian pose commands streamed at 1kHz, and execute them using a
 built-in Cartesian impedance controller. The corresponding enum of this mode is <code class="docutils literal notranslate"><span class="pre">flexiv::MODE_CARTESIAN_IMPEDANCE</span></code>,
 and the command can be sent to the robot using <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::streamTcpPose()</span></code>.</p>
-</section>
-</section>
-<section id="non-real-time-modes">
+</div>
+</div>
+<div class="section" id="non-real-time-modes">
 <h3>Non-real-time modes<a class="headerlink" href="#non-real-time-modes" title="Permalink to this headline">¶</a></h3>
 <p>When the robot is in non-real-time modes, instead of streaming commands at 1kHz, the user sends only high-level action instructions.</p>
-<section id="primitive-execution-mode">
+<div class="section" id="primitive-execution-mode">
 <h4>Primitive execution mode<a class="headerlink" href="#primitive-execution-mode" title="Permalink to this headline">¶</a></h4>
 <p>The robot accepts and executes primitives specified by the user. The corresponding enum of this mode
 is <code class="docutils literal notranslate"><span class="pre">flexiv::MODE_PRIMITIVE_EXECUTION</span></code>. The primitive command and parameters can be sent using <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::executePrimitive()</span></code>.</p>
-</section>
-<section id="plan-execution-mode">
+</div>
+<div class="section" id="plan-execution-mode">
 <h4>Plan execution mode<a class="headerlink" href="#plan-execution-mode" title="Permalink to this headline">¶</a></h4>
 <p>The robot will execute plans specified by the user. The corresponding enum of this mode is <code class="docutils literal notranslate"><span class="pre">flexiv::MODE_PLAN_EXECUTION</span></code>.
 A list of available plans can be obtained using <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::getPlanNameList()</span></code>, and the plan command can be sent using
 <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::executePlanByIndex()</span></code> or <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::executePlanByName()</span></code>.</p>
-</section>
-</section>
-</section>
-<section id="robot-states">
+</div>
+</div>
+</div>
+<div class="section" id="robot-states">
 <h2>Robot states<a class="headerlink" href="#robot-states" title="Permalink to this headline">¶</a></h2>
 <p>Robot states refer to the measured or estimated information of the robot. The data structure containing
 these information can be found in the header file <code class="docutils literal notranslate"><span class="pre">RobotStates.hpp</span></code>. Robot states are updated and published
 to the user in real time at 1kHz. However, the user is able to control how often they fetch the data by simply controlling
 the rate at which <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::getRobotStates()</span></code> is called.</p>
-</section>
-<section id="system-status">
+</div>
+<div class="section" id="system-status">
 <h2>System status<a class="headerlink" href="#system-status" title="Permalink to this headline">¶</a></h2>
 <p>System status refers to system-level information of the robot. The data structure containing these information
 is also in the header file <code class="docutils literal notranslate"><span class="pre">RobotStates.hpp</span></code>. Similar to robot states, system status is updated and published
 to user in real time at 1kHz. However, the user is able to control how often they fetch the data by simply controlling
 the rate at which <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::getSystemStatus()</span></code> is called.</p>
-</section>
-<section id="digital-i-o-control">
+</div>
+<div class="section" id="digital-i-o-control">
 <h2>Digital I/O control<a class="headerlink" href="#digital-i-o-control" title="Permalink to this headline">¶</a></h2>
 <p>The RDK library also provides the users with the ability to control the digital I/O ports located on the robot’s control box.
 16 digital outputs and 16 digital inputs are available, and the user can interact with them via <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::writeDigitalOutput()</span></code>
 and <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::readDigitalInput()</span></code>.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
