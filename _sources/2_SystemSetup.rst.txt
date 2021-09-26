@@ -63,31 +63,31 @@ A standard Ubuntu installation comes with a generic kernel, you can check the ve
 the major, minor and patch digits. In the following, we assume that you are patching a Linux Ubuntu 20.04 machine with a ``5.8.0`` kernel.
 
 Real-time kernel patches are only available for select versions. Please visit `here <https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/>`_ and 
-download the patches closest to your current kernel version. We assume that the closest patch is ``5.10.41-rt42``. Using the instructions 
+download the patches closest to your current kernel version. Please also visit the `kernel source website <https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/>`_ and download the kernel source. The version of the kernel source should be the same as the version indicated on the patch. We assume that the closest patch is ``5.10.65-rt53``. Using the instructions 
 from `the Linux Kernel Archives <https://www.kernel.org/signature.html>`_, run the following to download both the source and patch files:
 
 ::
 
-   curl -LO https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.10.41.tar.xz
-   curl -LO https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.10.41.tar.sign
-   curl -LO https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.10.41-rt42.patch.xz
-   curl -LO https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.10.41-rt42.patch.sign  
+   curl -LO https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.10.65.tar.xz
+   curl -LO https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.10.65.tar.sign
+   curl -LO https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/5.10/patch-5.10.65-rt53.patch.xz
+   curl -LO https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/5.10/patch-5.10.65-rt53.patch.sign  
 
 Verify the signature of the downloaded files before building and installing the new kernel. For kernel sources, this can be done with:
 
 ::
 
    gpg2 --locate-keys torvalds@kernel.org gregkh@kernel.org
-   xz -dk linux-5.10.41.tar.xz
-   gpg2 --verify linux-5.10.41.tar.sign
+   xz -dk linux-5.10.65.tar.xz
+   gpg2 --verify linux-5.10.65.tar.sign
 
 To verify the patches, please visit `the Linux Foundation Wiki <https://wiki.linuxfoundation.org/realtime/preempt_rt_versions>`_  to 
 search for a key of the author. Next, run the following verification:
 
 ::
 
-   xz -dk patch-5.10.41-rt42.patch.xz
-   gpg2 --verify patch-5.10.41-rt42.patch.sign
+   xz -dk patch-5.10.65-rt53.patch.xz
+   gpg2 --verify patch-5.10.65-rt53.patch.sign
 
 Compile and install real-time kernel
 --------------------------------------
@@ -95,9 +95,9 @@ Before compiling the sources, we have to apply the patches:
 
 ::
 
-   tar xf linux-5.10.41.tar
-   cd linux-5.10.41
-   patch -p1 < ../patch-5.10.41-rt42.patch
+   tar xf linux-5.10.65.tar
+   cd linux-5.10.65
+   patch -p1 < ../patch-5.10.65-rt53.patch
 
 Next, we configure our kernel:
 
@@ -105,7 +105,8 @@ Next, we configure our kernel:
 
    make oldconfig
 
-A series of questions will pop up, you can select the default option. When asked for the Preemption Model, choose the ``Fully Preemptible Kernel``
+A series of questions will pop up, you can select the default option. When asked for the Preemption Model, choose the ``Fully Preemptible Kernel``. For all
+the other questions, press enter to continue.
 
 ::
 
@@ -116,12 +117,30 @@ A series of questions will pop up, you can select the default option. When asked
    4. Fully Preemptible Kernel (Real-Time) (PREEMPT_RT) (NEW)
    choice[1-4?]: 4
 
+A file called ".config" will be generated. Before we can compile the kernel, open the ".config" file, find and set the following configuration parameters:
+
+::
+
+   CONFIG_SYSTEM_TRUSTED_KEYS = ""
+   CONFIG_SYSTEM_REVOCATION_KEYS = ""
+   
 Now, we are ready to compile our new kernel:
 
 ::
 
-   fakeroot make -j `getconf _NPROCESSORS_ONLN` deb-pkg
+   make -j `getconf _NPROCESSORS_ONLN` deb-pkg
 
+After the build is finished check the debian packages:
+
+::
+
+   ls ../*deb
+   
+Then we install all compiled kernel debian packages
+
+::
+
+   sudo dpkg -i ../*.deb
 
 Set user privileges to use real-time scheduling
 -------------------------------------------------
