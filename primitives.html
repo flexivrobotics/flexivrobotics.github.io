@@ -7,16 +7,17 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Preface &mdash; Flexiv RDK 0.2.0 documentation</title>
+  <title>Primitives &mdash; Flexiv Robot Development Kit  documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
 
   
+  
+    <link rel="shortcut icon" href="_static/flexiv_logo.ico"/>
   
 
   
@@ -41,8 +42,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Overview" href="1_Overview.html" />
-    <link rel="prev" title="Flexiv Robot Development Kit (RDK)" href="index.html" /> 
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="RDK Library" href="rdk_library.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -56,17 +57,21 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Flexiv RDK
+            <a href="index.html" class="icon icon-home"> Flexiv Robot Development Kit
           
 
           
             
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+            <img src="_static/RDK_logo.svg" class="logo" alt="Logo"/>
           
           </a>
 
           
             
+            
+              <div class="version">
+                0.3
+              </div>
             
           
 
@@ -91,13 +96,14 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1_Overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_SystemSetup.html">System Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_RdkLibrary.html">RDK Library</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5_Primitives.html">Primitives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="6_Troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_setup.html">System Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rdk_library.html">RDK Library</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 </ul>
 
             
@@ -113,7 +119,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Flexiv RDK</a>
+          <a href="index.html">Flexiv Robot Development Kit</a>
         
       </nav>
 
@@ -146,13 +152,13 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Preface</li>
+      <li>Primitives</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/0_Preface.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/primitives.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -165,44 +171,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="preface">
-<h1>Preface<a class="headerlink" href="#preface" title="Permalink to this headline">¶</a></h1>
-<p>Some functionalities mentioned in this RDK documentation are still a preview and are not available to use yet.
-Table below shows the current status of planned functionalities of RDK:</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Functionality</p></th>
-<th class="head"><p>Status</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Integrated Scheduler</p></td>
-<td><p>Available</p></td>
-</tr>
-<tr class="row-odd"><td><p>Integrated Dynamics Engine</p></td>
-<td><p>Available</p></td>
-</tr>
-<tr class="row-even"><td><p>Joint Position Control</p></td>
-<td><p>Available</p></td>
-</tr>
-<tr class="row-odd"><td><p>Joint Torque Control</p></td>
-<td><p>Available</p></td>
-</tr>
-<tr class="row-even"><td><p>Cartesian Impedance Control</p></td>
-<td><p>Available</p></td>
-</tr>
-<tr class="row-odd"><td><p>Plan Execution</p></td>
-<td><p>Available</p></td>
-</tr>
-<tr class="row-even"><td><p>Primitive Execution</p></td>
-<td><p>Coming soon - Q4 2021</p></td>
-</tr>
-</tbody>
-</table>
+  <div class="section" id="primitives">
+<h1>Primitives<a class="headerlink" href="#primitives" title="Permalink to this headline">¶</a></h1>
+<p>Primitives are unit actions and skills of the robot. They can be used collectively to form complex operations.
+The full documentation for all available primitives can be found at <a class="reference external" href="https://flexivrobotics.github.io/primitives/">https://flexivrobotics.github.io/primitives/</a>.</p>
 </div>
 
 
@@ -211,15 +183,15 @@ Table below shows the current status of planned functionalities of RDK:</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="1_Overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="index.html" class="btn btn-neutral float-left" title="Flexiv Robot Development Kit (RDK)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="changelog.html" class="btn btn-neutral float-right" title="Changelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="rdk_library.html" class="btn btn-neutral float-left" title="RDK Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, Flexiv.
+        &#169; Copyright 2021, Flexiv Ltd.
 
     </p>
   </div>

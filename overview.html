@@ -7,16 +7,17 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Overview &mdash; Flexiv RDK 0.2.0 documentation</title>
+  <title>Overview &mdash; Flexiv Robot Development Kit  documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
 
   
+  
+    <link rel="shortcut icon" href="_static/flexiv_logo.ico"/>
   
 
   
@@ -41,8 +42,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="System Setup" href="2_SystemSetup.html" />
-    <link rel="prev" title="Preface" href="0_Preface.html" /> 
+    <link rel="next" title="System Setup" href="system_setup.html" />
+    <link rel="prev" title="Flexiv RDK Manual" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -56,17 +57,21 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Flexiv RDK
+            <a href="index.html" class="icon icon-home"> Flexiv Robot Development Kit
           
 
           
             
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+            <img src="_static/RDK_logo.svg" class="logo" alt="Logo"/>
           
           </a>
 
           
             
+            
+              <div class="version">
+                0.3
+              </div>
             
           
 
@@ -91,18 +96,18 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="0_Preface.html">Preface</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#robot-states">Robot states</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#user-commands">User commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#key-features">Key features</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="2_SystemSetup.html">System Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_RdkLibrary.html">RDK Library</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5_Primitives.html">Primitives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="6_Troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_setup.html">System Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rdk_library.html">RDK Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 </ul>
 
             
@@ -118,7 +123,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Flexiv RDK</a>
+          <a href="index.html">Flexiv Robot Development Kit</a>
         
       </nav>
 
@@ -157,7 +162,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/1_Overview.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/overview.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -172,10 +177,9 @@
             
   <div class="section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>This quick start guide is an integral part of your new Flexiv Rizon. With Flexiv’s Robot Development Kit (RDK), developers will be able
-to connect their own workstation PC to Rizon via Ethernet (TCP/IP) connection, and send real-time low-level commands. This enables the
-developers to write powerful programs to operate Rizon in real time. The states and commands data between Rizon and the workstation PC
-are exchanged at a rate of 1kHz.</p>
+<p>With Flexiv RDK, users will be able to connect their own workstation PC to the robot via Ethernet (TCP/IP) connection,
+and send real-time low-level commands to the robot. This enables the users to write powerful programs to operate the robot
+in real time. The states and commands data between the robot and the workstation PC are exchanged at a rate of 1kHz.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>RDK gives you full access to the robot. This means that you <em>cannot</em> issue commands through the teach pendant.
@@ -183,7 +187,7 @@ Robot states, however, can still be read on the teach pendant.</p>
 </div>
 <div class="section" id="robot-states">
 <h2>Robot states<a class="headerlink" href="#robot-states" title="Permalink to this headline">¶</a></h2>
-<p>The available real-time robot states feedback from Rizon includes:</p>
+<p>The available real-time robot states feedback from the robot includes:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Measured joint-space states: joint position, velocity, and torque</p></li>
@@ -195,7 +199,7 @@ Robot states, however, can still be read on the teach pendant.</p>
 </div>
 <div class="section" id="user-commands">
 <h2>User commands<a class="headerlink" href="#user-commands" title="Permalink to this headline">¶</a></h2>
-<p>To control Rizon, two types of user commands are accepted, in terms of update rate:</p>
+<p>To control the robot, two types of user commands are accepted, in terms of update rate:</p>
 <ol class="arabic simple">
 <li><p>Real-time (RT) streaming commands at 1kHz update rate, including:</p></li>
 </ol>
@@ -222,24 +226,11 @@ and a workstation PC with real-time kernel is highly recommended. The setup deta
 <li><p>Other auxiliary commands like enable, start, stop, auto-recovery, etc</p></li>
 </ul>
 </div></blockquote>
-<p>The real-time commands can be calculated from user defined joint/Cartesian space motion generators, allowing developers to easily
+<p>The real-time commands can be calculated from user defined joint/Cartesian space motion generators, allowing users to easily
 integrate perception and other sensor modules to generate reactive motions.</p>
-<p>As for the non-real-time commands, instead of creating a custom motion generator, developers can send plan, primitive, or relatively sparse Cartesian references to
-leverage Rizon’s internal motion generator to generate smooth trajectories. When using such non-real-time controls, since the waypoints are internally calculated,
+<p>As for the non-real-time commands, instead of creating a custom motion generator, users can send plan, primitive, or relatively sparse Cartesian references to
+leverage the robot’s internal motion generator to generate smooth trajectories. When using such non-real-time controls, since the waypoints are internally calculated,
 the requirements for network connection and user PC’s performance can be relaxed.</p>
-</div>
-<div class="section" id="key-features">
-<h2>Key features<a class="headerlink" href="#key-features" title="Permalink to this headline">¶</a></h2>
-<p>Below is a list of other key features in Flexiv RDK:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Integrated high-priority scheduler to run user-defined real-time tasks at 1kHz</p></li>
-<li><p>Integrated dynamics engine to run-time get important robot dynamics data like mass matrix, gravity force, Coriolis force, etc</p></li>
-<li><p>Plenty of examples covering almost every aspect of Flexiv RDK to help developers quickly get started</p></li>
-<li><p>Simple and user friendly self-contained static library that can be easily linked into any cmake projects</p></li>
-<li><p>Kinematics-only URDF and 3D mesh files of Rizon for using with visualizers (e.g. RViz) and simulators (e.g. Gazebo and pybullet)</p></li>
-</ul>
-</div></blockquote>
 </div>
 </div>
 
@@ -249,15 +240,15 @@ the requirements for network connection and user PC’s performance can be relax
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="2_SystemSetup.html" class="btn btn-neutral float-right" title="System Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="0_Preface.html" class="btn btn-neutral float-left" title="Preface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="system_setup.html" class="btn btn-neutral float-right" title="System Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Flexiv RDK Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, Flexiv.
+        &#169; Copyright 2021, Flexiv Ltd.
 
     </p>
   </div>

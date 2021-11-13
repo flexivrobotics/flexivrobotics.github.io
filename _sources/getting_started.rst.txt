@@ -4,7 +4,7 @@ Getting Started
 .. (TODO) add instruction to configure license
 .. (TODO) add instruction to configure external mode on UI
 
-This section covers how to establish connection between the robot and the user's workstation PC, 
+This chapter covers how to establish connection between the robot and the user's workstation PC, 
 and run some examples to verify system functionalities. 
 
 Establish connection
@@ -18,12 +18,12 @@ onto a steady base and cannot topple over even when the robot is moving at high 
 2. Using an Ethernet cable, connect the Ethernet port on the workstation PC to the Ethernet port on the control box that is marked as LAN. 
 Ensure that connectors are firmly attached.
 
-   .. figure:: /Images/ioFullPanel.png
+   .. figure:: /_static/ioFullPanel.png
       :width: 75.0%
       :align: center
       :figclass: align-center   
 
-   .. figure:: /Images/ioFullPanelDetails.png
+   .. figure:: /_static/ioFullPanelDetails.png
       :width: 75.0%
       :align: center
       :figclass: align-center   
@@ -38,7 +38,7 @@ Ensure that connectors are firmly attached.
       Refer to the user manual for more details about **auto mode** and **manual mode**. Here we'll need 
       to use auto mode for RDK.
 
-   .. figure:: /Images/MotionBar_Image.png
+   .. figure:: /_static/MotionBar_Image.png
       :width: 70.0%
       :align: center
       :figclass: align-center
@@ -49,7 +49,7 @@ Ensure that connectors are firmly attached.
    The LED rings on the robot will turn solid **blue** when the robot is ready. This process may take up to 60 seconds.
 
    .. caution::
-      **Blinking** LED rings on the robot indicate a fault occurred. Please refer to the Troubleshooting section for more details.
+      **Blinking** LED rings on the robot indicate a fault occurred. Please refer to the :doc:`troubleshooting` chapter for more details.
 
 6. The default IP address of the robot is ``192.168.2.100``. By this time the connection should already have been established, 
    so check the connection by pinging the robot from the workstation PC::
@@ -86,67 +86,82 @@ To make sure the update is successful, check the version of ``libstdc++6`` using
 Look for the message ``libstdc++6 is already the newest version``, followed by the actual version number, which should be greater than 10.0.
 
 
+Obtain RDK library files
+-------------------------
+
+The Flexiv RDK library consists of headers, static library, examples, URDF, mesh files, etc. These are all hosted in a public GitHub repository at 
+`<https://github.com/flexivrobotics/flexiv_rdk/>`_.
+
+You can Git clone this repository or directly download it as a zip file.
+
+
 Build and run examples
 -----------------------
 
 Now that the connection is established, we'll need to enable the robot and verify the whole setup by running the ``display_robot_states`` 
 example, which will enable the robot then continuously get and print the current states of the robot while the robot holds itself at the current pose.
 
-.. Will assume that license is not ready and that we will be providing the zip examples
+1. Assuming you've cloned or downloaded the ``flexiv_rdk`` repository via the link above.
 
-1. Unzip the RDK library package provided by Flexiv.
-
-2. Configure CMake::
+2. Configure CMake and build all example programs::
 
       cd flexiv_rdk
       mkdir build && cd build
       cmake ..
+      make -j4
 
 3. Check the IP address of the workstation PC itself::
       
       sudo apt install net-tools
       ifconfig
 
-   You should see that one of the network drivers has been assigned by the robot an IP address within the same subnet as the robot, aka ``192.168.2.x``.
+   You should see that one of the network interface has been assigned by the robot an IP address within the same subnet as the robot, for example, ``192.168.2.200``.
 
-4. Update ``LOCAL_IP`` in ``flexiv_rdk/include/config.h`` with this IP address of the workstation PC.
-
-5. Build examples::
-
-      cd flexiv_rdk/build
-      make -j4
-
-6. Assuming the robot has already finished booting and the connection with the user's workstation PC is established according to instructions 
+4. Assuming the robot has already finished booting and the connection with the user's workstation PC is established according to instructions 
    mentioned above, now release (**pull up**) the emergency stop (E-stop) button on the motion bar. The robot will have no action because 
-   there's still one more step to actually enable the robot.
+   an enabling API needs to be called to actually enable the robot.
 
-7. Run the compiled example program ``display_robot_states``, which will first call an API to actually enable the robot, make sure the E-stop is 
-   already pulled up:: 
+5. Run the compiled example program ``display_robot_states``, which will first call the aforementioned API to enable the robot, then hold the robot while printing out 
+   all robot states. Make sure the E-stop is already pulled up:: 
 
       cd flexiv_rdk/build/example
-      sudo ./display_robot_states
+      sudo ./display_robot_states <robot_ip> <local_ip>
+   
+   The ``<local_ip>`` is what you get in step 3, for example::
 
-8. The robot will get enabled and release the brakes, which will make some audible crispy sound. After a few seconds when the enabling process is done and the robot 
+      sudo ./display_robot_states 192.168.2.100 192.168.2.200
+
+6. The robot will be enabled and release the joint brakes, which will make some audible crispy sound. After a few seconds when the enabling process is done and the robot 
    becomes operational, the 1kHz periodic user task loop will start to run, which in this example mainly prints the joint and Cartesian states of the robot. 
    An excerpt of the output is as follows:
 
    .. code-block:: c
 
-      "q" : [0.00000  -0.69813  0.00000  1.57079  0.00001  0.69813  -0.00000],
-      "dq" : [0.00124  -0.00159  0.00932  -0.0124  -0.00246  0.00245  0.00492],
-      "tau_J": [0.00000  48.12248  1.09559  -20.00126  -2.15257  2.42971  -0.00000],
-      "tau_J_ext": [2.01001  -10.02002  2.04536  23.23102  -9.23158  -5.61123  -4.23160],
-      "tcp_pose": [0.68701  -0.11000  0.29358  0.00000  0.00000  1.00000  0.00000],
-      "tcp_vel": [0.20001  0.30000  0.10002  0.02000  -0.03003  0.00210],
-      "tcp_acc": [0.00100  0.00030  0.00200  0.01000  0.00400  0.00050],
-      "tcp_wrench": [3.02003  -2.20300  1.00040  0.03030  3.10000  0.50020]
+      {
+      "q": [-0.02276,-0.0937682,0.0155674,1.62589,-0.0225268,0.208001,0.305311],
+      "theta": [-0.0230455,-0.0920024,0.0158942,1.62436,-0.022891,0.208576,0.307476],
+      "dq": [0.148054,0.0437919,0.122067,0.0455735,0.000637466,-0.00113799,0.241857],
+      "dtheta": [0.139027,0.0438319,0.121441,0.0512989,-0.000282414,-0.00172493,0.253589],
+      "tau": [0.616091,31.0906,0.935915,-23.633,-2.58817,2.43764,0.359142],
+      "tau_des": [1.56515,1.33795,0.700978,1.1427,0.2864,-0.113417,0.56946],
+      "tau_dot": [-44.9559,-8.10623,8.79854,1.38283,3.13401,14.9822,7.0242],
+      "tau_ext": [-0.180099,-0.775732,-0.0763522,-0.69938,-0.44841,0.166297,-0.441835],
+      "tcp_pose": [0.55174,-0.114317,0.593904,0.0226307,0.150829,0.988264,-0.00854974],
+      "tcp_pose_d": [0.548872,-0.104836,0.593404,0.0257007,0.152765,0.987845,-0.01286],
+      "tcp_velocity": [0.00320276,0.141547,-0.00176686,0.0203958,0.00281812,0.00697462],
+      "camera_pose": [0.623739,-0.136403,0.635011,0.00995671,-0.592156,0.805461,-0.0220479],
+      "flange_pose": [0.55174,-0.114317,0.593904,0.0226307,0.150829,0.988264,-0.00854974],
+      "end_link_pose": [0.548621,-0.112561,0.667818,0.00854974,0.988264,-0.150829,0.0226307],
+      "F_ext_tcp_frame": [-0.921438,-0.445242,-0.515255,0.139577,0.0974587,-0.323618],
+      "F_ext_base_frame": [0.723944,-0.687035,0.562729,-0.117632,0.142245,0.315654],
+      }
 
 
-9. Use ``CTRL+C`` to close the example program. 
+7. Use ``CTRL+C`` to close the example program. 
 
    .. note::
       When the RDK user program is terminated or the connection is lost, the robot will automatically decelerate to a halt and hold its position. 
       The robot server supports on-the-fly reconnection, so you can terminate a user program and start a new one without doing anything to the robot side.
 
-The next section will provide more details on the RDK library, and you can also check out the other 
+The next chapter will provide more details on the RDK library, and you can also check out the other 
 examples to get familiar with RDK APIs and how to use them.

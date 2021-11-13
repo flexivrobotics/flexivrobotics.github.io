@@ -7,16 +7,17 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>RDK Library &mdash; Flexiv RDK 0.2.0 documentation</title>
+  <title>RDK Library &mdash; Flexiv Robot Development Kit  documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
 
   
+  
+    <link rel="shortcut icon" href="_static/flexiv_logo.ico"/>
   
 
   
@@ -41,8 +42,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Primitives" href="5_Primitives.html" />
-    <link rel="prev" title="Getting Started" href="3_GettingStarted.html" /> 
+    <link rel="next" title="Primitives" href="primitives.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -56,17 +57,21 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Flexiv RDK
+            <a href="index.html" class="icon icon-home"> Flexiv Robot Development Kit
           
 
           
             
-            <img src="_static/logo.png" class="logo" alt="Logo"/>
+            <img src="_static/RDK_logo.svg" class="logo" alt="Logo"/>
           
           </a>
 
           
             
+            
+              <div class="version">
+                0.3
+              </div>
             
           
 
@@ -91,13 +96,12 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="0_Preface.html">Preface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1_Overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_SystemSetup.html">System Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_setup.html">System Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">RDK Library</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#library-files">Library files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#robot-modes">Robot modes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#idle-mode">Idle mode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#real-time-modes">Real-time modes</a><ul>
@@ -116,10 +120,13 @@
 <li class="toctree-l2"><a class="reference internal" href="#robot-states">Robot states</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#system-status">System status</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#digital-i-o-control">Digital I/O control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#integrated-visualization">Integrated visualization</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="5_Primitives.html">Primitives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="6_Troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 </ul>
 
             
@@ -135,7 +142,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Flexiv RDK</a>
+          <a href="index.html">Flexiv Robot Development Kit</a>
         
       </nav>
 
@@ -174,7 +181,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/4_RdkLibrary.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/rdk_library.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -189,61 +196,36 @@
             
   <div class="section" id="rdk-library">
 <h1>RDK Library<a class="headerlink" href="#rdk-library" title="Permalink to this headline">¶</a></h1>
-<p>The Flexiv RDK library allows the robot to be monitored and controlled
-by developers via Ethernet connection. Developers have real-time access to
-the states data from the robot. Control commands can be sent to the robot and get
-executed at a rate of up to 1000 Hz.</p>
-<div class="section" id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
-<p>To get a complete view of APIs in the RDK library, please refer to the
-<a class="reference external" href="https://flexivrobotics.github.io/flexiv_rdk/">Doxygen generated API documentation</a>.</p>
-</div>
+<p>All functionalities of RDK are packed into the Flexiv RDK library, which allows the robot to be monitored and
+controlled by a workstation PC running programs compiled from the library. Users will have real-time access to
+the states data from the robot. When the robot is put into a real-time operation mode, low-level control commands
+can be sent to the robot and executed at 1kHz. Non-real-time operation modes are also available for the users to
+send high-level commands.</p>
 <div class="section" id="library-files">
 <h2>Library files<a class="headerlink" href="#library-files" title="Permalink to this headline">¶</a></h2>
-<p>Below is the file structure of the library:</p>
+<p>As mentioned in the start page, all RDK library files are hosted on GitHub as <code class="docutils literal notranslate"><span class="pre">flexiv_rdk</span></code>
+repository at <a class="reference external" href="https://github.com/flexivrobotics/flexiv_rdk/">https://github.com/flexivrobotics/flexiv_rdk/</a>.
+Below is a brief file structure of the library:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>flexiv_rdk
 ├── include
-│   ├── Mode.hpp
-│   └── Model.hpp
-│   └── Robot.hpp
-│   └── RobotStates.hpp
+│   └── (headers with RDK library APIs)
 ├── lib
 │   └── libFlexivRdk.a
 ├── example
-│   └── (various examples)
+│   └── (examples covering most RDK features)
 ├── test
-│   └── (various tests)
-└── urdf
-    └── (URDF with accurate kinematics and approximated dynamics)
+│   └── (unit tests)
+└── spec
+    └── (URDF with accurate robot kinematics but approximated dynamics)
     └── meshes
         └── (mesh files for visual and collision)
 </pre></div>
 </div>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>File Name</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Mode.hpp</p></td>
-<td><p>A header with a list of operation modes that the users can put the robot into</p></td>
-</tr>
-<tr class="row-odd"><td><p>Model.hpp</p></td>
-<td><p>A header with APIs to use the integrated dynamics engine</p></td>
-</tr>
-<tr class="row-even"><td><p>Robot.hpp</p></td>
-<td><p>A header with APIs to interact with the robot</p></td>
-</tr>
-<tr class="row-odd"><td><p>RobotStates.hpp</p></td>
-<td><p>A header with several data structures containing feedback data from the robot</p></td>
-</tr>
-</tbody>
-</table>
+</div>
+<div class="section" id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The detailed documentation on all APIs of the RDK library can be found at
+<a class="reference external" href="https://flexivrobotics.github.io/flexiv_rdk/">https://flexivrobotics.github.io/flexiv_rdk/</a>.</p>
 </div>
 <div class="section" id="robot-modes">
 <h2>Robot modes<a class="headerlink" href="#robot-modes" title="Permalink to this headline">¶</a></h2>
@@ -289,7 +271,7 @@ is <code class="docutils literal notranslate"><span class="pre">flexiv::MODE_IDL
 </div>
 <div class="section" id="real-time-modes">
 <h3>Real-time modes<a class="headerlink" href="#real-time-modes" title="Permalink to this headline">¶</a></h3>
-<p>When the robot is in real-time modes, user commands will be executed right away without excessive processing
+<p>When the robot is in a real-time mode, user commands will be executed right away without excessive processing
 or filtering to ensure the control loop is at 1kHz.</p>
 <div class="section" id="joint-position-mode">
 <h4>Joint position mode<a class="headerlink" href="#joint-position-mode" title="Permalink to this headline">¶</a></h4>
@@ -346,6 +328,25 @@ the rate at which <code class="docutils literal notranslate"><span class="pre">f
 16 digital outputs and 16 digital inputs are available, and the user can interact with them via <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::writeDigitalOutput()</span></code>
 and <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::readDigitalInput()</span></code>.</p>
 </div>
+<div class="section" id="integrated-visualization">
+<h2>Integrated visualization<a class="headerlink" href="#integrated-visualization" title="Permalink to this headline">¶</a></h2>
+<p>RDK has integrated visualization based on Meshcat. To use it, follow instructions below.</p>
+<ol class="arabic">
+<li><p>Install Meshcat server using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">meshcat</span>
+</pre></div>
+</div>
+</li>
+<li><p>Start the Meshcat server in Terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meshcat</span><span class="o">-</span><span class="n">server</span>
+</pre></div>
+</div>
+</li>
+<li><p>It will provide several URLs, open <code class="docutils literal notranslate"><span class="pre">web_url</span></code> with a web browser. An empty scene will open up.</p></li>
+<li><p>Use APIs in <code class="docutils literal notranslate"><span class="pre">flexiv::Visualization</span></code> to communicate with the Meshcat server, the empty scene will be populated with robot(s) and user-defined objects if any. Refer to <code class="docutils literal notranslate"><span class="pre">example/visualization.cpp</span></code>.</p></li>
+</ol>
+<p><strong>Note:</strong> only STL mesh files are supported, which are provided in <code class="docutils literal notranslate"><span class="pre">spec/meshes</span></code>.</p>
+</div>
 </div>
 
 
@@ -354,15 +355,15 @@ and <code class="docutils literal notranslate"><span class="pre">flexiv::Robot::
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="5_Primitives.html" class="btn btn-neutral float-right" title="Primitives" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="3_GettingStarted.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="primitives.html" class="btn btn-neutral float-right" title="Primitives" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021, Flexiv.
+        &#169; Copyright 2021, Flexiv Ltd.
 
     </p>
   </div>

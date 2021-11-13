@@ -1,9 +1,0 @@
-Preface
-========
-
-Some functionalities mentioned in this RDK documentation are still a preview and are not available to use yet.
-Table below shows the current status of planned functionalities of RDK:
-
-.. csv-table::
-   :file: ./functionality_status.csv
-   :header-rows: 1

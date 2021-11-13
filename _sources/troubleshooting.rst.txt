@@ -1,9 +1,7 @@
-.. _troubleshooting:
-
 Troubleshooting
 =================
 
-This section covers common issues/faults with the robot and how to solve them.
+This chapter covers common issues/faults with the robot and how to solve them.
 
 Error message
 --------------

@@ -1,44 +1,40 @@
 RDK Library
 =============
 
-The Flexiv RDK library allows the robot to be monitored and controlled 
-by developers via Ethernet connection. Developers have real-time access to 
-the states data from the robot. Control commands can be sent to the robot and get 
-executed at a rate of up to 1000 Hz.
+All functionalities of RDK are packed into the Flexiv RDK library, which allows the robot to be monitored and 
+controlled by a workstation PC running programs compiled from the library. Users will have real-time access to 
+the states data from the robot. When the robot is put into a real-time operation mode, low-level control commands 
+can be sent to the robot and executed at 1kHz. Non-real-time operation modes are also available for the users to 
+send high-level commands.
 
-API documentation
-------------------
-
-To get a complete view of APIs in the RDK library, please refer to the 
-`Doxygen generated API documentation <https://flexivrobotics.github.io/flexiv_rdk/>`_.
 
 Library files
 -------------
 
-Below is the file structure of the library:
-
-::
+As mentioned in the start page, all RDK library files are hosted on GitHub as ``flexiv_rdk`` 
+repository at `<https://github.com/flexivrobotics/flexiv_rdk/>`_. 
+Below is a brief file structure of the library::
 
     flexiv_rdk
     ├── include          
-    │   ├── Mode.hpp
-    │   └── Model.hpp
-    │   └── Robot.hpp
-    │   └── RobotStates.hpp
+    │   └── (headers with RDK library APIs)
     ├── lib          
     │   └── libFlexivRdk.a
     ├── example          
-    │   └── (various examples)
+    │   └── (examples covering most RDK features)
     ├── test          
-    │   └── (various tests)
-    └── urdf          
-        └── (URDF with accurate kinematics and approximated dynamics)
+    │   └── (unit tests)
+    └── spec          
+        └── (URDF with accurate robot kinematics but approximated dynamics)
         └── meshes
             └── (mesh files for visual and collision)
 
-.. csv-table::
-   :file: ./file_desc.csv
-   :header-rows: 1
+
+API documentation
+------------------
+
+The detailed documentation on all APIs of the RDK library can be found at 
+`<https://flexivrobotics.github.io/flexiv_rdk/>`_.
 
 
 Robot modes
@@ -63,7 +59,7 @@ is ``flexiv::MODE_IDLE``.
 Real-time modes
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-When the robot is in real-time modes, user commands will be executed right away without excessive processing 
+When the robot is in a real-time mode, user commands will be executed right away without excessive processing 
 or filtering to ensure the control loop is at 1kHz.
 
 Joint position mode
@@ -128,3 +124,23 @@ Digital I/O control
 The RDK library also provides the users with the ability to control the digital I/O ports located on the robot's control box. 
 16 digital outputs and 16 digital inputs are available, and the user can interact with them via ``flexiv::Robot::writeDigitalOutput()`` 
 and ``flexiv::Robot::readDigitalInput()``.
+
+
+Integrated visualization
+-------------------------
+
+RDK has integrated visualization based on Meshcat. To use it, follow instructions below.
+
+1. Install Meshcat server using ``pip``::
+
+        pip install meshcat
+
+2. Start the Meshcat server in Terminal::
+
+        meshcat-server
+
+3. It will provide several URLs, open ``web_url`` with a web browser. An empty scene will open up.
+
+4. Use APIs in ``flexiv::Visualization`` to communicate with the Meshcat server, the empty scene will be populated with robot(s) and user-defined objects if any. Refer to ``example/visualization.cpp``.
+
+**Note:** only STL mesh files are supported, which are provided in ``spec/meshes``.

@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Getting Started &mdash; Flexiv Robot Development Kit  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/flexiv_logo.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RDK Library" href="rdk_library.html" />
+    <link rel="prev" title="System Setup" href="system_setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Flexiv Robot Development Kit
+          
+
+          
+            
+            <img src="_static/RDK_logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_setup.html">System Setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#establish-connection">Establish connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-compiler-setup">Additional compiler setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#obtain-rdk-library-files">Obtain RDK library files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-and-run-examples">Build and run examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rdk_library.html">RDK Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives.html">Primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Flexiv Robot Development Kit</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Getting Started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/getting_started.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>This chapter covers how to establish connection between the robot and the user’s workstation PC,
+and run some examples to verify system functionalities.</p>
+<div class="section" id="establish-connection">
+<h2>Establish connection<a class="headerlink" href="#establish-connection" title="Permalink to this headline">¶</a></h2>
+<p>The following steps show how to physically connect user’s workstation PC to the robot:</p>
+<p>1. Make sure the system is powered <strong>OFF</strong> and the robot arm is mounted on a stable base. The robot must be securely mounted
+onto a steady base and cannot topple over even when the robot is moving at high speeds with sudden stops.</p>
+<p>2. Using an Ethernet cable, connect the Ethernet port on the workstation PC to the Ethernet port on the control box that is marked as LAN.
+Ensure that connectors are firmly attached.</p>
+<blockquote>
+<div><div class="align-center figure">
+<a class="reference internal image-reference" href="_images/ioFullPanel.png"><img alt="_images/ioFullPanel.png" src="_images/ioFullPanel.png" style="width: 75.0%;" /></a>
+</div>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="_images/ioFullPanelDetails.png"><img alt="_images/ioFullPanelDetails.png" src="_images/ioFullPanelDetails.png" style="width: 75.0%;" /></a>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The connection between the robot and the workstation PC should be a direct connection. Going through a
+router or an ethernet switch can result in reduced control performance due to extra network latency.</p>
+</div>
+</div></blockquote>
+<ol class="arabic" start="3">
+<li><p>With the system powered <strong>OFF</strong>, push the <strong>mode selection switch</strong> on the motion bar to upper position (i.e. <strong>auto mode</strong>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Refer to the user manual for more details about <strong>auto mode</strong> and <strong>manual mode</strong>. Here we’ll need
+to use auto mode for RDK.</p>
+</div>
+<div class="align-center figure">
+<a class="reference internal image-reference" href="_images/MotionBar_Image.png"><img alt="_images/MotionBar_Image.png" src="_images/MotionBar_Image.png" style="width: 70.0%;" /></a>
+</div>
+</li>
+<li><p>Check that the <strong>emergency stop</strong> (E-stop) on the motion bar is pressed down.</p></li>
+<li><p>Power <strong>ON</strong> the system using the power switch located on the control box, then wait until booting is complete.
+The LED rings on the robot will turn solid <strong>blue</strong> when the robot is ready. This process may take up to 60 seconds.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p><strong>Blinking</strong> LED rings on the robot indicate a fault occurred. Please refer to the <a class="reference internal" href="troubleshooting.html"><span class="doc">Troubleshooting</span></a> chapter for more details.</p>
+</div>
+</li>
+<li><p>The default IP address of the robot is <code class="docutils literal notranslate"><span class="pre">192.168.2.100</span></code>. By this time the connection should already have been established,
+so check the connection by pinging the robot from the workstation PC:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ping</span> <span class="mf">192.168.2.100</span>
+</pre></div>
+</div>
+<p>The <em>time</em> value from the ping command denotes the round trip time and this value should be well below <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">ms</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The workstation PC must be in the same subnet (i.e. with IP address <code class="docutils literal notranslate"><span class="pre">192.168.2.x</span></code>) with the robot in order to connect.
+However, the user does NOT need to configure the workstation PC’s IP address manually, because the robot has its own DHCP
+server built in. So when the robot finishes booting with the workstation PC is connected, the
+DHCP server will automatically assign an IP address in the same subnet to the workstation PC.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="additional-compiler-setup">
+<h2>Additional compiler setup<a class="headerlink" href="#additional-compiler-setup" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Skip this step if you are using Ubuntu 20.04, the additional compiler setup is only needed by Ubuntu 18.04.</p>
+</div>
+<p>The Flexiv RDK static library <code class="docutils literal notranslate"><span class="pre">libFlexivRdk.a</span></code> is generated by the compiler on a Ubuntu 20.04 machine, which uses newer C++ standard
+than that of Ubuntu 18.04. Thus, for users with Ubuntu 18.04, they need to update the C++ standard headers installed in the workstation PC
+to be able to successfully link to the static library. Use the below Terminal commands to update:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">ubuntu</span><span class="o">-</span><span class="n">toolchain</span><span class="o">-</span><span class="n">r</span><span class="o">/</span><span class="n">test</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">libstdc</span><span class="o">++</span><span class="mi">6</span>
+</pre></div>
+</div>
+<p>To make sure the update is successful, check the version of <code class="docutils literal notranslate"><span class="pre">libstdc++6</span></code> using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">libstdc</span><span class="o">++</span><span class="mi">6</span>
+</pre></div>
+</div>
+<p>Look for the message <code class="docutils literal notranslate"><span class="pre">libstdc++6</span> <span class="pre">is</span> <span class="pre">already</span> <span class="pre">the</span> <span class="pre">newest</span> <span class="pre">version</span></code>, followed by the actual version number, which should be greater than 10.0.</p>
+</div>
+<div class="section" id="obtain-rdk-library-files">
+<h2>Obtain RDK library files<a class="headerlink" href="#obtain-rdk-library-files" title="Permalink to this headline">¶</a></h2>
+<p>The Flexiv RDK library consists of headers, static library, examples, URDF, mesh files, etc. These are all hosted in a public GitHub repository at
+<a class="reference external" href="https://github.com/flexivrobotics/flexiv_rdk/">https://github.com/flexivrobotics/flexiv_rdk/</a>.</p>
+<p>You can Git clone this repository or directly download it as a zip file.</p>
+</div>
+<div class="section" id="build-and-run-examples">
+<h2>Build and run examples<a class="headerlink" href="#build-and-run-examples" title="Permalink to this headline">¶</a></h2>
+<p>Now that the connection is established, we’ll need to enable the robot and verify the whole setup by running the <code class="docutils literal notranslate"><span class="pre">display_robot_states</span></code>
+example, which will enable the robot then continuously get and print the current states of the robot while the robot holds itself at the current pose.</p>
+<ol class="arabic">
+<li><p>Assuming you’ve cloned or downloaded the <code class="docutils literal notranslate"><span class="pre">flexiv_rdk</span></code> repository via the link above.</p></li>
+<li><p>Configure CMake and build all example programs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">flexiv_rdk</span>
+<span class="n">mkdir</span> <span class="n">build</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">..</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j4</span>
+</pre></div>
+</div>
+</li>
+<li><p>Check the IP address of the workstation PC itself:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">net</span><span class="o">-</span><span class="n">tools</span>
+<span class="n">ifconfig</span>
+</pre></div>
+</div>
+<p>You should see that one of the network interface has been assigned by the robot an IP address within the same subnet as the robot, for example, <code class="docutils literal notranslate"><span class="pre">192.168.2.200</span></code>.</p>
+</li>
+<li><p>Assuming the robot has already finished booting and the connection with the user’s workstation PC is established according to instructions
+mentioned above, now release (<strong>pull up</strong>) the emergency stop (E-stop) button on the motion bar. The robot will have no action because
+an enabling API needs to be called to actually enable the robot.</p></li>
+<li><p>Run the compiled example program <code class="docutils literal notranslate"><span class="pre">display_robot_states</span></code>, which will first call the aforementioned API to enable the robot, then hold the robot while printing out
+all robot states. Make sure the E-stop is already pulled up:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">flexiv_rdk</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">example</span>
+<span class="n">sudo</span> <span class="o">./</span><span class="n">display_robot_states</span> <span class="o">&lt;</span><span class="n">robot_ip</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">local_ip</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;local_ip&gt;</span></code> is what you get in step 3, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">./</span><span class="n">display_robot_states</span> <span class="mf">192.168.2.100</span> <span class="mf">192.168.2.200</span>
+</pre></div>
+</div>
+</li>
+<li><p>The robot will be enabled and release the joint brakes, which will make some audible crispy sound. After a few seconds when the enabling process is done and the robot
+becomes operational, the 1kHz periodic user task loop will start to run, which in this example mainly prints the joint and Cartesian states of the robot.
+An excerpt of the output is as follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="s">&quot;q&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">-0.02276</span><span class="p">,</span><span class="mf">-0.0937682</span><span class="p">,</span><span class="mf">0.0155674</span><span class="p">,</span><span class="mf">1.62589</span><span class="p">,</span><span class="mf">-0.0225268</span><span class="p">,</span><span class="mf">0.208001</span><span class="p">,</span><span class="mf">0.305311</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;theta&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">-0.0230455</span><span class="p">,</span><span class="mf">-0.0920024</span><span class="p">,</span><span class="mf">0.0158942</span><span class="p">,</span><span class="mf">1.62436</span><span class="p">,</span><span class="mf">-0.022891</span><span class="p">,</span><span class="mf">0.208576</span><span class="p">,</span><span class="mf">0.307476</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;dq&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.148054</span><span class="p">,</span><span class="mf">0.0437919</span><span class="p">,</span><span class="mf">0.122067</span><span class="p">,</span><span class="mf">0.0455735</span><span class="p">,</span><span class="mf">0.000637466</span><span class="p">,</span><span class="mf">-0.00113799</span><span class="p">,</span><span class="mf">0.241857</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;dtheta&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.139027</span><span class="p">,</span><span class="mf">0.0438319</span><span class="p">,</span><span class="mf">0.121441</span><span class="p">,</span><span class="mf">0.0512989</span><span class="p">,</span><span class="mf">-0.000282414</span><span class="p">,</span><span class="mf">-0.00172493</span><span class="p">,</span><span class="mf">0.253589</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;tau&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.616091</span><span class="p">,</span><span class="mf">31.0906</span><span class="p">,</span><span class="mf">0.935915</span><span class="p">,</span><span class="mf">-23.633</span><span class="p">,</span><span class="mf">-2.58817</span><span class="p">,</span><span class="mf">2.43764</span><span class="p">,</span><span class="mf">0.359142</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;tau_des&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">1.56515</span><span class="p">,</span><span class="mf">1.33795</span><span class="p">,</span><span class="mf">0.700978</span><span class="p">,</span><span class="mf">1.1427</span><span class="p">,</span><span class="mf">0.2864</span><span class="p">,</span><span class="mf">-0.113417</span><span class="p">,</span><span class="mf">0.56946</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;tau_dot&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">-44.9559</span><span class="p">,</span><span class="mf">-8.10623</span><span class="p">,</span><span class="mf">8.79854</span><span class="p">,</span><span class="mf">1.38283</span><span class="p">,</span><span class="mf">3.13401</span><span class="p">,</span><span class="mf">14.9822</span><span class="p">,</span><span class="mf">7.0242</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;tau_ext&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">-0.180099</span><span class="p">,</span><span class="mf">-0.775732</span><span class="p">,</span><span class="mf">-0.0763522</span><span class="p">,</span><span class="mf">-0.69938</span><span class="p">,</span><span class="mf">-0.44841</span><span class="p">,</span><span class="mf">0.166297</span><span class="p">,</span><span class="mf">-0.441835</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;tcp_pose&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.55174</span><span class="p">,</span><span class="mf">-0.114317</span><span class="p">,</span><span class="mf">0.593904</span><span class="p">,</span><span class="mf">0.0226307</span><span class="p">,</span><span class="mf">0.150829</span><span class="p">,</span><span class="mf">0.988264</span><span class="p">,</span><span class="mf">-0.00854974</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;tcp_pose_d&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.548872</span><span class="p">,</span><span class="mf">-0.104836</span><span class="p">,</span><span class="mf">0.593404</span><span class="p">,</span><span class="mf">0.0257007</span><span class="p">,</span><span class="mf">0.152765</span><span class="p">,</span><span class="mf">0.987845</span><span class="p">,</span><span class="mf">-0.01286</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;tcp_velocity&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.00320276</span><span class="p">,</span><span class="mf">0.141547</span><span class="p">,</span><span class="mf">-0.00176686</span><span class="p">,</span><span class="mf">0.0203958</span><span class="p">,</span><span class="mf">0.00281812</span><span class="p">,</span><span class="mf">0.00697462</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;camera_pose&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.623739</span><span class="p">,</span><span class="mf">-0.136403</span><span class="p">,</span><span class="mf">0.635011</span><span class="p">,</span><span class="mf">0.00995671</span><span class="p">,</span><span class="mf">-0.592156</span><span class="p">,</span><span class="mf">0.805461</span><span class="p">,</span><span class="mf">-0.0220479</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;flange_pose&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.55174</span><span class="p">,</span><span class="mf">-0.114317</span><span class="p">,</span><span class="mf">0.593904</span><span class="p">,</span><span class="mf">0.0226307</span><span class="p">,</span><span class="mf">0.150829</span><span class="p">,</span><span class="mf">0.988264</span><span class="p">,</span><span class="mf">-0.00854974</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;end_link_pose&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.548621</span><span class="p">,</span><span class="mf">-0.112561</span><span class="p">,</span><span class="mf">0.667818</span><span class="p">,</span><span class="mf">0.00854974</span><span class="p">,</span><span class="mf">0.988264</span><span class="p">,</span><span class="mf">-0.150829</span><span class="p">,</span><span class="mf">0.0226307</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;F_ext_tcp_frame&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">-0.921438</span><span class="p">,</span><span class="mf">-0.445242</span><span class="p">,</span><span class="mf">-0.515255</span><span class="p">,</span><span class="mf">0.139577</span><span class="p">,</span><span class="mf">0.0974587</span><span class="p">,</span><span class="mf">-0.323618</span><span class="p">],</span><span class="w"></span>
+<span class="s">&quot;F_ext_base_frame&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.723944</span><span class="p">,</span><span class="mf">-0.687035</span><span class="p">,</span><span class="mf">0.562729</span><span class="p">,</span><span class="mf">-0.117632</span><span class="p">,</span><span class="mf">0.142245</span><span class="p">,</span><span class="mf">0.315654</span><span class="p">],</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">CTRL+C</span></code> to close the example program.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When the RDK user program is terminated or the connection is lost, the robot will automatically decelerate to a halt and hold its position.
+The robot server supports on-the-fly reconnection, so you can terminate a user program and start a new one without doing anything to the robot side.</p>
+</div>
+</li>
+</ol>
+<p>The next chapter will provide more details on the RDK library, and you can also check out the other
+examples to get familiar with RDK APIs and how to use them.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="rdk_library.html" class="btn btn-neutral float-right" title="RDK Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="system_setup.html" class="btn btn-neutral float-left" title="System Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Flexiv Ltd.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
