@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                0.3
+                0.4
               </div>
             
           
@@ -187,14 +187,10 @@ as well as this RDK manual, and strictly follow <strong>all safety instructions<
 </div>
 <div class="section" id="key-features">
 <h2>Key features<a class="headerlink" href="#key-features" title="Permalink to this headline">¶</a></h2>
-<div class="line-block">
-<div class="line">RT = real-time</div>
-<div class="line">NRT = non-real-time</div>
-</div>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 23%" />
-<col style="width: 77%" />
+<col style="width: 19%" />
+<col style="width: 81%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Feature</p></th>
@@ -203,19 +199,19 @@ as well as this RDK manual, and strictly follow <strong>all safety instructions<
 </thead>
 <tbody>
 <tr class="row-even"><td><p>RT operation modes</p></td>
-<td><p>The robot can execute low-level commands like joint torques, joint positions, Cartesian pose, etc. in real time at 1kHz.</p></td>
+<td><p>The robot can execute low-level commands like joint torques, joint positions, Cartesian pose, etc. at 1kHz.</p></td>
 </tr>
 <tr class="row-odd"><td><p>NRT operation modes</p></td>
-<td><p>The robot can execute high-level commands like plans, primitives, digital IO, etc. in a NRT manner.</p></td>
+<td><p>The robot can execute high-level commands like plans, primitives, digital IO, etc. as well as NRT motion commands.</p></td>
 </tr>
 <tr class="row-even"><td><p>RT states feedback</p></td>
-<td><p>The robot publishes states data in real time at 1kHz no matter what operation mode is being used.</p></td>
+<td><p>The robot sends back states data at 1kHz no matter what operation mode is being used.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Timeliness monitor</p></td>
 <td><p>When in a RT operation mode, the robot checks if the user command arrives in time at 1kHz.</p></td>
 </tr>
-<tr class="row-even"><td><p>Integrated high-priority scheduler</p></td>
-<td><p>Users can use the scheduler to run their own tasks in real time at 1kHz.</p></td>
+<tr class="row-even"><td><p>Integrated RT scheduler</p></td>
+<td><p>Users can use this high-priority scheduler to run their own computation tasks in real time at 1kHz.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Integrated dynamics engine</p></td>
 <td><p>Users can run-time access important robot dynamics data like mass matrix, gravity force, Coriolis force, etc.</p></td>
@@ -223,17 +219,23 @@ as well as this RDK manual, and strictly follow <strong>all safety instructions<
 <tr class="row-even"><td><p>Integrated visualization</p></td>
 <td><p>Lightweight and easy-to-use visualizer based on Meshcat for users to see the robot(s) and scene as they run.</p></td>
 </tr>
-<tr class="row-odd"><td><p>Self-contained static library (C++)</p></td>
-<td><p>Lightweight and compiler-friendly library that can be easily linked into any CMake projects.</p></td>
+<tr class="row-odd"><td><p>Portable C++ library</p></td>
+<td><p>Self-contained static library that can be easily linked into a CMake project.</p></td>
 </tr>
-<tr class="row-even"><td><p>Example pool</p></td>
+<tr class="row-even"><td><p>Portable Python library</p></td>
+<td><p>Self-contained dynamic library that can be easily imported into a Python script.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Example pool</p></td>
 <td><p>Plenty of informative examples covering almost every aspect of Flexiv RDK to help users quickly get started.</p></td>
 </tr>
-<tr class="row-odd"><td><p>Robot description</p></td>
-<td><p>Kinematics-only URDF and 3D mesh files of the robot for using with visualizers and simulators.</p></td>
+<tr class="row-even"><td><p>Robot description</p></td>
+<td><p>Kinematics-only URDF and 3D mesh files of the robot for visualizers and simulators.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="line-block">
+<div class="line">RT: real-time, NRT: non-real-time</div>
+</div>
 </div>
 <div class="section" id="coming-soon">
 <h2>Coming soon<a class="headerlink" href="#coming-soon" title="Permalink to this headline">¶</a></h2>
@@ -248,16 +250,7 @@ as well as this RDK manual, and strictly follow <strong>all safety instructions<
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>NRT joint position control</p></td>
-<td><p>RDK 0.4</p></td>
-</tr>
-<tr class="row-odd"><td><p>NRT Cartesian pose control</p></td>
-<td><p>RDK 0.4</p></td>
-</tr>
-<tr class="row-even"><td><p>Python APIs for NRT modes</p></td>
-<td><p>RDK 0.4</p></td>
-</tr>
-<tr class="row-odd"><td><p>Windows support for NRT modes</p></td>
+<tr class="row-even"><td><p>Windows support for NRT modes</p></td>
 <td><p>RDK 0.5</p></td>
 </tr>
 </tbody>
@@ -268,31 +261,29 @@ as well as this RDK manual, and strictly follow <strong>all safety instructions<
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#robot-states">Robot states</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#user-commands">User commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#os-and-language-support">OS and language support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#real-time-rt-apis">Real-time (RT) APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#non-real-time-nrt-apis">Non-real-time (NRT) APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#feedback-states">Feedback states</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system_setup.html">System Setup</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="system_setup.html#hardware-setup">Hardware setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system_setup.html#system-requirements">System requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system_setup.html#real-time-kernel-setup">Real-time kernel setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="system_setup.html#optional-verify-downloaded-files">(Optional) Verify downloaded files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="system_setup.html#compile-and-install-real-time-kernel">Compile and install real-time kernel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="system_setup.html#set-user-privileges-to-use-real-time-scheduling">Set user privileges to use real-time scheduling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="system_setup.html#set-grub-to-boot-with-real-time-kernel">Set GRUB to boot with real-time kernel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="system_setup.html#optional-disable-cpu-speed-scaling">(Optional) Disable CPU speed scaling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#establish-connection">Establish connection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#additional-compiler-setup">Additional compiler setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#setup-environment-on-workstation-pc">Setup environment on workstation PC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#obtain-rdk-library-files">Obtain RDK library files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#build-and-run-examples">Build and run examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#run-example-programs">Run example programs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rdk_library.html">RDK Library</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="rdk_library.html#library-files">Library files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rdk_library.html#api-documentation">API documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rdk_library.html#programming-language-interfaces">Programming language interfaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rdk_library.html#robot-modes">Robot modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rdk_library.html#robot-states">Robot states</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rdk_library.html#system-status">System status</a></li>

@@ -19,22 +19,49 @@ Below is a brief file structure of the library::
     ├── include          
     │   └── (headers with RDK library APIs)
     ├── lib          
-    │   └── libFlexivRdk.a
+    │   └── libFlexivRdk.a (static library for C++ interface)
+    │   └── flexivrdk.so (dynamic library for Python interface)
     ├── example          
-    │   └── (examples covering most RDK features)
+    │   └── (examples covering most APIs for C++ interface)
+    ├── example_py          
+    │   └── (examples covering most APIs for Python interface)
     ├── test          
-    │   └── (unit tests)
-    └── spec          
-        └── (URDF with accurate robot kinematics but approximated dynamics)
-        └── meshes
-            └── (mesh files for visual and collision)
-
+    │   └── (functionality tests)
+    ├── spec          
+    │   └── (URDF with accurate robot kinematics but approximated dynamics)
+    │   └── meshes
+    │       └── (mesh files for visual and collision)
+    └── thirdparty          
+        └── Eigen (header-only Eigen library required by RDK)
 
 API documentation
 ------------------
 
 The detailed documentation on all APIs of the RDK library can be found at 
 `<https://flexivrobotics.github.io/flexiv_rdk/>`_.
+
+
+Programming language interfaces
+--------------------------------
+
+**C++** and **Python** are currently supported by RDK. The C++ interface has access to all APIs, including real-time (RT) 
+and non-real-time (NRT) ones, while the Python interface can only access some non-real-time (NRT) APIs as listed below:
+
++-----------------------+-------------------------------------------------------------+
+| API                   | Access from Python interface                                |
++=======================+=============================================================+
+| flexiv::Robot         | Partial access, as indicated by ``@version`` of each method |
++-----------------------+-------------------------------------------------------------+
+| flexiv::RobotStates   | Full access, except for any operator overloading            |
++-----------------------+-------------------------------------------------------------+
+| flexiv::Mode          | Full access                                                 |
++-----------------------+-------------------------------------------------------------+
+| flexiv::Log           | No access                                                   |
++-----------------------+-------------------------------------------------------------+
+| flexiv::Model         | No access                                                   |
++-----------------------+-------------------------------------------------------------+
+| flexiv::Visualization | No access                                                   |
++-----------------------+-------------------------------------------------------------+
 
 
 Robot modes
@@ -45,9 +72,27 @@ user to put the robot into a corresponding mode before sending actual control co
 be found in ``Mode.hpp``. Use ``Robot::setMode()`` to put the robot into a certain mode before sending any commands.
 The type of each mode is shown below:
 
-.. csv-table::
-   :file: ./control_mode.csv
-   :header-rows: 1
++------------------------------+------+
+| Mode                         | Type |
++==============================+======+
+| Idle mode                    | Idle |
++------------------------------+------+
+| Joint torque mode            | RT   |
++------------------------------+------+
+| Joint position mode          | RT   |
++------------------------------+------+
+| Cartesian impedance mode     | RT   |
++------------------------------+------+
+| Joint position NRT mode      | NRT  |
++------------------------------+------+
+| Cartesian impedance NRT mode | NRT  |
++------------------------------+------+
+| Plan execution mode          | NRT  |
++------------------------------+------+
+| Primitive execution mode     | NRT  |
++------------------------------+------+
+
+| RT: real-time, NRT: non-real-time
 
 
 Idle mode
@@ -59,35 +104,52 @@ is ``flexiv::MODE_IDLE``.
 Real-time modes
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-When the robot is in a real-time mode, user commands will be executed right away without excessive processing 
-or filtering to ensure the control loop is at 1kHz.
-
-Joint position mode
-^^^^^^^^^^^^^^^^^^^
-
-The robot accepts and executes joint position commands streamed at 1kHz. 
-The corresponding enum of this mode is ``flexiv::MODE_JOINT_POSITION``, 
-and the command can be sent to the robot using ``flexiv::Robot::streamJointPosition()``.
+When the robot is in real-time modes, the user can send real-time motion commands at 1kHz, which will be executed 
+right away without excessive processing or filtering to ensure the control loop is running at 1kHz.
 
 Joint torque mode
 ^^^^^^^^^^^^^^^^^
 
-The robot accepts and executes joint torque commands streamed at 1kHz.
-The corresponding enum of this mode is ``flexiv::MODE_JOINT_TORQUE``, 
+The robot accepts joint torque commands streamed at 1kHz, and execute them using a built-in joint torque controller. 
+Gravity and friction are compensated. The corresponding enum of this mode is ``flexiv::MODE_JOINT_TORQUE``, 
 and the command can be sent to the robot using ``flexiv::Robot::streamJointTorque()``.
+
+Joint position mode
+^^^^^^^^^^^^^^^^^^^
+
+The robot accepts joint position commands streamed at 1kHz, and execute them using a built-in joint position controller. 
+Gravity, friction, and dynamics are compensated. The corresponding enum of this mode is ``flexiv::MODE_JOINT_POSITION``, 
+and the command can be sent to the robot using ``flexiv::Robot::streamJointPosition()``.
 
 Cartesian impedance mode
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The robot accepts Cartesian pose commands streamed at 1kHz, and execute them using a
-built-in Cartesian impedance controller. The corresponding enum of this mode is ``flexiv::MODE_CARTESIAN_IMPEDANCE``, 
+The robot accepts Cartesian pose commands streamed at 1kHz, and execute them using a built-in Cartesian impedance controller. 
+Gravity, friction, and dynamics are compensated. The corresponding enum of this mode is ``flexiv::MODE_CARTESIAN_IMPEDANCE``, 
 and the command can be sent to the robot using ``flexiv::Robot::streamTcpPose()``.
 
 
 Non-real-time modes
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-When the robot is in non-real-time modes, instead of streaming commands at 1kHz, the user sends only high-level action instructions.
+When the robot is in non-real-time modes, the user can send non-real-time motion commands at less than 1kHz or 
+high-level action instructions like plans and primitives.
+
+Joint position NRT mode
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Non-real-time version of the joint position mode. The robot accepts joint position commands at less than 1kHz, 
+and smoothen the target points with a built-in motion generator, then execute them using a built-in joint position 
+controller. Gravity, friction, and dynamics are compensated. The corresponding enum of this mode is ``flexiv::MODE_JOINT_POSITION_NRT``, 
+and the command can be sent to the robot using ``flexiv::Robot::sendJointPosition()``.
+
+Cartesian impedance NRT mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Non-real-time version of the Cartesian impedance mode. The robot accepts Cartesian pose commands at less than 1kHz, 
+and smoothen the target points with a built-in motion generator, then execute them using a built-in Cartesian impedance 
+controller. Gravity, friction, and dynamics are compensated. The corresponding enum of this mode is ``flexiv::MODE_CARTESIAN_IMPEDANCE_NRT``, 
+and the command can be sent to the robot using ``flexiv::Robot::sendTcpPose()``.
 
 Primitive execution mode
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -129,7 +191,7 @@ and ``flexiv::Robot::readDigitalInput()``.
 Integrated visualization
 -------------------------
 
-RDK has integrated visualization based on Meshcat. To use it, follow instructions below.
+RDK has integrated visualization (only available for C++ interface) based on Meshcat. To use this feature:
 
 1. Install Meshcat server using ``pip``::
 

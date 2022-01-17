@@ -8,7 +8,7 @@ followed by instructions to setup a real-time Linux (Ubuntu with RT kernel)
 Hardware setup
 --------------
 
-The connection between the motion bar, robot and the control box are
+The connection between the motion bar, robot, and control box are
 described in detail in the robot's user manual. Please refer to 
 the manual for the initial setup of the robot. In order to connect 
 the user's workstation PC to the robot, Flexiv RDK must be used.
@@ -21,31 +21,56 @@ the user's workstation PC to the robot, Flexiv RDK must be used.
 .. note::
    Teach pendant is not required for using Flexiv RDK.
 
-.. important::
-   The robot must be securely mounted to the base and will not topple over even during fast motions.
+.. caution::
+   The robot must be securely mounted to the base and will not get loose even during fast motions.
 
 
 System requirements
 ---------------------------
 
-This section specifies the workstation PC's requirements for running Flexiv's RDK.
+Minimum requirements for using **real-time** APIs:
 
-+-----------------------------------------------------------------------------------+
-| Minimum Operating System Requirements                                             |
-+----------------------+------------------------------------------------------------+
-| Operating system     | Linux Ubuntu 18.04 or 20.04 with PREEMPT_RT patched kernel |
-+----------------------+------------------------------------------------------------+
-| Network card         | At least 100BASE-TX with Cat-5 cables                      |
-+----------------------+------------------------------------------------------------+
++--------------------+------------------------------------------------------+
+| **Workstation PC**                                                        |
++--------------------+------------------------------------------------------+
+| Operating system   | Ubuntu 18.04 or 20.04 with PREEMPT_RT patched kernel |
++--------------------+------------------------------------------------------+
+| CPU                | Depends on computation load of user program          |
++--------------------+------------------------------------------------------+
+| Network card       | 100BASE-TX                                           |
++--------------------+------------------------------------------------------+
+| **Network**                                                               |
++--------------------+------------------------------------------------------+
+| Connection         | Direct LAN connection with a Cat-5 cable             |
++--------------------+------------------------------------------------------+
 
-.. .. important::
-..   In streaming mode, the robot sends data at 1 kHz frequency. Tt is important that the user computer is configured 
-..   to minimize latencies. For example, we recommend to disable CPU frequency scaling. Other possible 
-..   optimizations will depend on your particular system.   
+Minimum requirements for using **non-real-time** APIs:
+
++--------------------+------------------------------------------------------+
+| **Workstation PC**                                                        |
++--------------------+------------------------------------------------------+
+| Operating system   | Ubuntu 18.04 or 20.04                                |
++--------------------+------------------------------------------------------+
+| CPU                | Depends on computation load of user program          |
++--------------------+------------------------------------------------------+
+| Network card       | 100BASE-TX                                           |
++--------------------+------------------------------------------------------+
+| **Network**                                                               |
++--------------------+------------------------------------------------------+
+| Connection         | Direct LAN connection with a Cat-5 cable             |
++--------------------+------------------------------------------------------+
+
+.. note::
+   If you will only be using the **non-real-time** APIs, the generic kernel shipped natively with Ubuntu 
+   installation is enough, so you do not need to patch the PREEMPT_RT kernel, which means you can **skip 
+   all steps below**.
 
 
 Real-time kernel setup
 --------------------------------
+
+Prepare files
+~~~~~~~~~~~~~~
 
 In order to control the robot using RDK, the controller program on the workstation PC must run as a *real-time process* under a 
 real-time kernel. We suggest the *PREEMPT_RT* kernel for this purpose due to its balance between ease of use and real-time performance.
@@ -83,7 +108,7 @@ Unzip the xz packages::
 
 
 (Optional) Verify downloaded files
-------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To verify the signature of kernel sources, run the following::
 
@@ -97,7 +122,7 @@ to search for a key of the author, then run the following::
 
 
 Compile and install real-time kernel
---------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Before compiling the sources, we have to apply the patches::
 
    tar xf linux-5.11.4.tar
@@ -137,7 +162,7 @@ Then we install all compiled kernel debian packages::
 
 
 Set user privileges to use real-time scheduling
--------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To be able to schedule threads with user privileges, we will need to change the user's limits by modifying ``/etc/security/limits.conf``. 
 To do so, we create a group named *realtime* and add the user operating the robot to this group::
@@ -156,7 +181,7 @@ Next, make sure ``/etc/security/limits.conf`` contains the following::
 
 
 Set GRUB to boot with real-time kernel
-----------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We will use grub-customizer to configure grub. To download and install, run::
 
@@ -171,7 +196,7 @@ show a string with the ``PREEMPT_RT`` keyword.
 
 
 (Optional) Disable CPU speed scaling
-------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Modern CPUs are able to dynamically scale their frequency depending on operating conditions. In some cases, this can lead to uneven processing speed 
 that in turn interrupts execution. These fluctuations in processing speed can affect the overall performance of the real-time processes.

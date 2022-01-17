@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.3
+                0.4
               </div>
             
           
@@ -100,12 +100,15 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">System Setup</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#hardware-setup">Hardware setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#system-requirements">System requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#real-time-kernel-setup">Real-time kernel setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#optional-verify-downloaded-files">(Optional) Verify downloaded files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#compile-and-install-real-time-kernel">Compile and install real-time kernel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#set-user-privileges-to-use-real-time-scheduling">Set user privileges to use real-time scheduling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#set-grub-to-boot-with-real-time-kernel">Set GRUB to boot with real-time kernel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#optional-disable-cpu-speed-scaling">(Optional) Disable CPU speed scaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#real-time-kernel-setup">Real-time kernel setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prepare-files">Prepare files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-verify-downloaded-files">(Optional) Verify downloaded files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compile-and-install-real-time-kernel">Compile and install real-time kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-user-privileges-to-use-real-time-scheduling">Set user privileges to use real-time scheduling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-grub-to-boot-with-real-time-kernel">Set GRUB to boot with real-time kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-disable-cpu-speed-scaling">(Optional) Disable CPU speed scaling</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
@@ -188,7 +191,7 @@ A brief introduction is provided for the hardware subsystems of the robot,
 followed by instructions to setup a real-time Linux (Ubuntu with RT kernel)</p>
 <div class="section" id="hardware-setup">
 <h2>Hardware setup<a class="headerlink" href="#hardware-setup" title="Permalink to this headline">¶</a></h2>
-<p>The connection between the motion bar, robot and the control box are
+<p>The connection between the motion bar, robot, and control box are
 described in detail in the robot’s user manual. Please refer to
 the manual for the initial setup of the robot. In order to connect
 the user’s workstation PC to the robot, Flexiv RDK must be used.</p>
@@ -199,33 +202,74 @@ the user’s workstation PC to the robot, Flexiv RDK must be used.</p>
 <p class="admonition-title">Note</p>
 <p>Teach pendant is not required for using Flexiv RDK.</p>
 </div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>The robot must be securely mounted to the base and will not topple over even during fast motions.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The robot must be securely mounted to the base and will not get loose even during fast motions.</p>
 </div>
 </div>
 <div class="section" id="system-requirements">
 <h2>System requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
-<p>This section specifies the workstation PC’s requirements for running Flexiv’s RDK.</p>
+<p>Minimum requirements for using <strong>real-time</strong> APIs:</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 27%" />
 <col style="width: 73%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td colspan="2"><p>Minimum Operating System Requirements</p></td>
+<tr class="row-odd"><td colspan="2"><p><strong>Workstation PC</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>Operating system</p></td>
-<td><p>Linux Ubuntu 18.04 or 20.04 with PREEMPT_RT patched kernel</p></td>
+<td><p>Ubuntu 18.04 or 20.04 with PREEMPT_RT patched kernel</p></td>
 </tr>
-<tr class="row-odd"><td><p>Network card</p></td>
-<td><p>At least 100BASE-TX with Cat-5 cables</p></td>
+<tr class="row-odd"><td><p>CPU</p></td>
+<td><p>Depends on computation load of user program</p></td>
+</tr>
+<tr class="row-even"><td><p>Network card</p></td>
+<td><p>100BASE-TX</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><strong>Network</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Connection</p></td>
+<td><p>Direct LAN connection with a Cat-5 cable</p></td>
 </tr>
 </tbody>
 </table>
+<p>Minimum requirements for using <strong>non-real-time</strong> APIs:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 73%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td colspan="2"><p><strong>Workstation PC</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Operating system</p></td>
+<td><p>Ubuntu 18.04 or 20.04</p></td>
+</tr>
+<tr class="row-odd"><td><p>CPU</p></td>
+<td><p>Depends on computation load of user program</p></td>
+</tr>
+<tr class="row-even"><td><p>Network card</p></td>
+<td><p>100BASE-TX</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><strong>Network</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Connection</p></td>
+<td><p>Direct LAN connection with a Cat-5 cable</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you will only be using the <strong>non-real-time</strong> APIs, the generic kernel shipped natively with Ubuntu
+installation is enough, so you do not need to patch the PREEMPT_RT kernel, which means you can <strong>skip
+all steps below</strong>.</p>
+</div>
 </div>
 <div class="section" id="real-time-kernel-setup">
 <h2>Real-time kernel setup<a class="headerlink" href="#real-time-kernel-setup" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prepare-files">
+<h3>Prepare files<a class="headerlink" href="#prepare-files" title="Permalink to this headline">¶</a></h3>
 <p>In order to control the robot using RDK, the controller program on the workstation PC must run as a <em>real-time process</em> under a
 real-time kernel. We suggest the <em>PREEMPT_RT</em> kernel for this purpose due to its balance between ease of use and real-time performance.</p>
 <div class="admonition note">
@@ -259,7 +303,7 @@ available.</p>
 </div>
 </div>
 <div class="section" id="optional-verify-downloaded-files">
-<h2>(Optional) Verify downloaded files<a class="headerlink" href="#optional-verify-downloaded-files" title="Permalink to this headline">¶</a></h2>
+<h3>(Optional) Verify downloaded files<a class="headerlink" href="#optional-verify-downloaded-files" title="Permalink to this headline">¶</a></h3>
 <p>To verify the signature of kernel sources, run the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpg2</span> <span class="o">--</span><span class="n">locate</span><span class="o">-</span><span class="n">keys</span> <span class="n">torvalds</span><span class="nd">@kernel</span><span class="o">.</span><span class="n">org</span> <span class="n">gregkh</span><span class="nd">@kernel</span><span class="o">.</span><span class="n">org</span>
 <span class="n">gpg2</span> <span class="o">--</span><span class="n">verify</span> <span class="n">linux</span><span class="o">-</span><span class="mf">5.11.4</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">sign</span>
@@ -272,7 +316,7 @@ to search for a key of the author, then run the following:</p>
 </div>
 </div>
 <div class="section" id="compile-and-install-real-time-kernel">
-<h2>Compile and install real-time kernel<a class="headerlink" href="#compile-and-install-real-time-kernel" title="Permalink to this headline">¶</a></h2>
+<h3>Compile and install real-time kernel<a class="headerlink" href="#compile-and-install-real-time-kernel" title="Permalink to this headline">¶</a></h3>
 <p>Before compiling the sources, we have to apply the patches:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tar</span> <span class="n">xf</span> <span class="n">linux</span><span class="o">-</span><span class="mf">5.11.4</span><span class="o">.</span><span class="n">tar</span>
 <span class="n">cd</span> <span class="n">linux</span><span class="o">-</span><span class="mf">5.11.4</span>
@@ -312,7 +356,7 @@ When done, a file called “.config” will be generated. Before we can compile 
 </div>
 </div>
 <div class="section" id="set-user-privileges-to-use-real-time-scheduling">
-<h2>Set user privileges to use real-time scheduling<a class="headerlink" href="#set-user-privileges-to-use-real-time-scheduling" title="Permalink to this headline">¶</a></h2>
+<h3>Set user privileges to use real-time scheduling<a class="headerlink" href="#set-user-privileges-to-use-real-time-scheduling" title="Permalink to this headline">¶</a></h3>
 <p>To be able to schedule threads with user privileges, we will need to change the user’s limits by modifying <code class="docutils literal notranslate"><span class="pre">/etc/security/limits.conf</span></code>.
 To do so, we create a group named <em>realtime</em> and add the user operating the robot to this group:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo groupadd realtime
@@ -330,7 +374,7 @@ sudo usermod -aG realtime $(whoami)
 </div>
 </div>
 <div class="section" id="set-grub-to-boot-with-real-time-kernel">
-<h2>Set GRUB to boot with real-time kernel<a class="headerlink" href="#set-grub-to-boot-with-real-time-kernel" title="Permalink to this headline">¶</a></h2>
+<h3>Set GRUB to boot with real-time kernel<a class="headerlink" href="#set-grub-to-boot-with-real-time-kernel" title="Permalink to this headline">¶</a></h3>
 <p>We will use grub-customizer to configure grub. To download and install, run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">danielrichter2007</span><span class="o">/</span><span class="n">grub</span><span class="o">-</span><span class="n">customizer</span> <span class="o">-</span><span class="n">y</span>
 <span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span> <span class="o">-</span><span class="n">y</span>
@@ -342,7 +386,7 @@ sudo usermod -aG realtime $(whoami)
 show a string with the <code class="docutils literal notranslate"><span class="pre">PREEMPT_RT</span></code> keyword.</p>
 </div>
 <div class="section" id="optional-disable-cpu-speed-scaling">
-<h2>(Optional) Disable CPU speed scaling<a class="headerlink" href="#optional-disable-cpu-speed-scaling" title="Permalink to this headline">¶</a></h2>
+<h3>(Optional) Disable CPU speed scaling<a class="headerlink" href="#optional-disable-cpu-speed-scaling" title="Permalink to this headline">¶</a></h3>
 <p>Modern CPUs are able to dynamically scale their frequency depending on operating conditions. In some cases, this can lead to uneven processing speed
 that in turn interrupts execution. These fluctuations in processing speed can affect the overall performance of the real-time processes.</p>
 <p>To disable speed scaling, we will use <code class="docutils literal notranslate"><span class="pre">cpufrequtils</span></code> to disable power saving mode:</p>
@@ -356,6 +400,7 @@ We will switch all governers to <code class="docutils literal notranslate"><span
 <span class="n">sudo</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;echo &quot;GOVERNOR=performance&quot; &gt; /etc/default/cpufrequtils&#39;</span>
 <span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">restart</span> <span class="n">cpufrequtils</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>

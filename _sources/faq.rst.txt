@@ -21,8 +21,9 @@ Windows support is planned to be added in a future release. MacOS will not be su
 
 What programming language does RDK support?
 -------------------------------------------------
-The current release of RDK only supports C++. Python support is planned to be added in a 
-future release.
+The current release of RDK supports C++ and Python. 
+Note that the C++ interface has access to all APIs, including real-time (RT) and non-real-time (NRT) ones, 
+while the Python interface can only access non-real-time (NRT) APIs.
 
  
 What features are available in the current version of RDK?

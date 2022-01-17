@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.3
+                0.4
               </div>
             
           
@@ -97,8 +97,10 @@
             
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#robot-states">Robot states</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#user-commands">User commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#os-and-language-support">OS and language support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#real-time-rt-apis">Real-time (RT) APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#non-real-time-nrt-apis">Non-real-time (NRT) APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#feedback-states">Feedback states</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="system_setup.html">System Setup</a></li>
@@ -177,60 +179,94 @@
             
   <div class="section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>With Flexiv RDK, users will be able to connect their own workstation PC to the robot via Ethernet (TCP/IP) connection,
-and send real-time low-level commands to the robot. This enables the users to write powerful programs to operate the robot
-in real time. The states and commands data between the robot and the workstation PC are exchanged at a rate of 1kHz.</p>
+<p>Flexiv RDK enables the users to connect their own workstation PC to the robot via Ethernet (TCP/IP) connection,
+and gain full control of the robot with the provided real-time and non-real-time APIs. Powerful user programs can
+be created for easy integration with external software or hardware modules, such as ROS, industrial control
+systems, additional sensors, vision and perception units, third-party libraries, etc.</p>
+<div class="section" id="os-and-language-support">
+<h2>OS and language support<a class="headerlink" href="#os-and-language-support" title="Permalink to this headline">¶</a></h2>
+<p>Supported OS:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Ubuntu 20.04 (Linux)</p></li>
+<li><p>Ubuntu 18.04 (Linux)</p></li>
+</ul>
+</div></blockquote>
+<p>Supported programming language interfaces:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>C++ (access to all APIs)</p></li>
+<li><p>Python (access to non-real-time APIs only)</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="real-time-rt-apis">
+<h2>Real-time (RT) APIs<a class="headerlink" href="#real-time-rt-apis" title="Permalink to this headline">¶</a></h2>
+<p>With real-time APIs, the robot states and user commands are exchanged between the workstation PC and the robot
+at 1kHz. Real-time commands, with the help of RDK’s integrated RT scheduler, can be generated from user programs
+running on the workstation PC to gain low-level control of the robot. The available real-time controls are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Joint torque control (w/ gravity and friction compensation)</p></li>
+<li><p>Joint position control (w/ gravity, friction, and dynamics compensation)</p></li>
+<li><p>Cartesian pose control (w/ gravity, friction, and dynamics compensation)</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Real-time APIs can <em>only</em> be accessed via RDK’s C++ interface. The Python interface does not have access. More
+details will be provided in <a class="reference internal" href="rdk_library.html"><span class="doc">RDK Library</span></a> chapter.</p>
+</div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>RDK gives you full access to the robot. This means that you <em>cannot</em> issue commands through the teach pendant.
-Robot states, however, can still be read on the teach pendant.</p>
+<p>Since real-time data is streamed over the network at 1 kHz, a low-latency setup is required. Thus, a direct network
+connection (i.e. without switches/routers) and a workstation PC with real-time kernel is highly recommended. More
+details will be provided in the next <a class="reference internal" href="system_setup.html"><span class="doc">System Setup</span></a> chapter.</p>
 </div>
-<div class="section" id="robot-states">
-<h2>Robot states<a class="headerlink" href="#robot-states" title="Permalink to this headline">¶</a></h2>
-<p>The available real-time robot states feedback from the robot includes:</p>
+</div>
+<div class="section" id="non-real-time-nrt-apis">
+<h2>Non-real-time (NRT) APIs<a class="headerlink" href="#non-real-time-nrt-apis" title="Permalink to this headline">¶</a></h2>
+<p>With non-real-time APIs, the user can send high-level action instructions or discrete motion commands to leverage the
+robot’s internal motion generator for smooth trajectories. Since the continuous trajectories are internally calculated
+by the robot, the requirements for network connection and workstation PC’s performance can be relaxed. The available
+non-real-time controls are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Discrete joint position control (internal motion generator w/ all compensations)</p></li>
+<li><p>Discrete Cartesian pose control (internal motion generator w/ all compensations)</p></li>
+<li><p>Plan execution</p></li>
+<li><p>Primitive execution</p></li>
+<li><p>Digital IO control</p></li>
+<li><p>Auxiliary instructions like enable, stop, auto-recovery, etc.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Non-real-time APIs can be accessed via both C++ interface and Python interface.</p>
+</div>
+</div>
+<div class="section" id="feedback-states">
+<h2>Feedback states<a class="headerlink" href="#feedback-states" title="Permalink to this headline">¶</a></h2>
+<p>Regardless of the type of APIs (real-time or non-real-time) being used, the feedback states are always published from
+the robot server in real time at 1kHz. They include:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Measured joint-space states: joint position, velocity, and torque</p></li>
 <li><p>Computed Cartesian-space states: TCP pose, velocity, and acceleration</p></li>
-<li><p>Estimated states: joint external torque and external wrench on TCP</p></li>
-<li><p>System status: emergency stop, digital IO, error message, etc</p></li>
+<li><p>Estimated states: external joint torque and external TCP wrench</p></li>
+<li><p>System status: emergency stop, digital IO, error message, etc.</p></li>
 </ul>
 </div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although these states are published at 1kHz at all time, the actual frequency at which the states data is accessed
+by the user depends the user’s system and program setup.</p>
 </div>
-<div class="section" id="user-commands">
-<h2>User commands<a class="headerlink" href="#user-commands" title="Permalink to this headline">¶</a></h2>
-<p>To control the robot, two types of user commands are accepted, in terms of update rate:</p>
-<ol class="arabic simple">
-<li><p>Real-time (RT) streaming commands at 1kHz update rate, including:</p></li>
-</ol>
-<blockquote>
-<div><ul class="simple">
-<li><p>Gravity &amp; friction compensated joint torques command</p></li>
-<li><p>Joint positions command</p></li>
-<li><p>Cartesian pose command</p></li>
-</ul>
-</div></blockquote>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Since real-time data is streamed over the network at 1 kHz, a low-latency setup is required. Thus, a direct network connection (i.e. without switches/routers)
-and a workstation PC with real-time kernel is highly recommended. The setup details are covered in the subsequent sections.</p>
+<p>RDK gives you full access to the robot. This means you <em>cannot</em> issue commands through the teach pendant while using
+RDK. However, robot states will still be displayed on the teach pendant.</p>
 </div>
-<ol class="arabic simple" start="2">
-<li><p>Non-real-time (NRT) commands, including:</p></li>
-</ol>
-<blockquote>
-<div><ul class="simple">
-<li><p>Plan execution command</p></li>
-<li><p>Primitive execution command</p></li>
-<li><p>Digital IO command for controlling external devices</p></li>
-<li><p>Other auxiliary commands like enable, start, stop, auto-recovery, etc</p></li>
-</ul>
-</div></blockquote>
-<p>The real-time commands can be calculated from user defined joint/Cartesian space motion generators, allowing users to easily
-integrate perception and other sensor modules to generate reactive motions.</p>
-<p>As for the non-real-time commands, instead of creating a custom motion generator, users can send plan, primitive, or relatively sparse Cartesian references to
-leverage the robot’s internal motion generator to generate smooth trajectories. When using such non-real-time controls, since the waypoints are internally calculated,
-the requirements for network connection and user PC’s performance can be relaxed.</p>
 </div>
 </div>
 

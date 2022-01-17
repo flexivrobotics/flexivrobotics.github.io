@@ -26,32 +26,33 @@ In addition, a detailed documentation on available **robot primitives** can be f
 Key features
 --------------
 
-| RT = real-time
-| NRT = non-real-time
++----------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Feature                    | Summary                                                                                                            |
++============================+====================================================================================================================+
+| RT operation modes         | The robot can execute low-level commands like joint torques, joint positions, Cartesian pose, etc. at 1kHz.        |
++----------------------------+--------------------------------------------------------------------------------------------------------------------+
+| NRT operation modes        | The robot can execute high-level commands like plans, primitives, digital IO, etc. as well as NRT motion commands. |
++----------------------------+--------------------------------------------------------------------------------------------------------------------+
+| RT states feedback         | The robot sends back states data at 1kHz no matter what operation mode is being used.                              |
++----------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Timeliness monitor         | When in a RT operation mode, the robot checks if the user command arrives in time at 1kHz.                         |
++----------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Integrated RT scheduler    | Users can use this high-priority scheduler to run their own computation tasks in real time at 1kHz.                |
++----------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Integrated dynamics engine | Users can run-time access important robot dynamics data like mass matrix, gravity force, Coriolis force, etc.      |
++----------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Integrated visualization   | Lightweight and easy-to-use visualizer based on Meshcat for users to see the robot(s) and scene as they run.       |
++----------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Portable C++ library       | Self-contained static library that can be easily linked into a CMake project.                                      |
++----------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Portable Python library    | Self-contained dynamic library that can be easily imported into a Python script.                                   |
++----------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Example pool               | Plenty of informative examples covering almost every aspect of Flexiv RDK to help users quickly get started.       |
++----------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Robot description          | Kinematics-only URDF and 3D mesh files of the robot for visualizers and simulators.                                |
++----------------------------+--------------------------------------------------------------------------------------------------------------------+
 
-+-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
-| Feature                             | Summary                                                                                                                  |
-+=====================================+==========================================================================================================================+
-| RT operation modes                  | The robot can execute low-level commands like joint torques, joint positions, Cartesian pose, etc. in real time at 1kHz. |
-+-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
-| NRT operation modes                 | The robot can execute high-level commands like plans, primitives, digital IO, etc. in a NRT manner.                      |
-+-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
-| RT states feedback                  | The robot publishes states data in real time at 1kHz no matter what operation mode is being used.                        |
-+-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
-| Timeliness monitor                  | When in a RT operation mode, the robot checks if the user command arrives in time at 1kHz.                               |
-+-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
-| Integrated high-priority scheduler  | Users can use the scheduler to run their own tasks in real time at 1kHz.                                                 |
-+-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
-| Integrated dynamics engine          | Users can run-time access important robot dynamics data like mass matrix, gravity force, Coriolis force, etc.            |
-+-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
-| Integrated visualization            | Lightweight and easy-to-use visualizer based on Meshcat for users to see the robot(s) and scene as they run.             |
-+-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
-| Self-contained static library (C++) | Lightweight and compiler-friendly library that can be easily linked into any CMake projects.                             |
-+-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
-| Example pool                        | Plenty of informative examples covering almost every aspect of Flexiv RDK to help users quickly get started.             |
-+-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
-| Robot description                   | Kinematics-only URDF and 3D mesh files of the robot for using with visualizers and simulators.                           |
-+-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| RT: real-time, NRT: non-real-time
 
 
 Coming soon
@@ -60,12 +61,6 @@ Coming soon
 +-------------------------------+-------------------+
 | Feature                       | Scheduled release |
 +===============================+===================+
-| NRT joint position control    | RDK 0.4           |
-+-------------------------------+-------------------+
-| NRT Cartesian pose control    | RDK 0.4           |
-+-------------------------------+-------------------+
-| Python APIs for NRT modes     | RDK 0.4           |
-+-------------------------------+-------------------+
 | Windows support for NRT modes | RDK 0.5           |
 +-------------------------------+-------------------+
 
