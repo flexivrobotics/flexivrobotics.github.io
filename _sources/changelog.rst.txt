@@ -1,4 +1,0 @@
-Changelog
-=================
-
-The full changelog of the Flexiv RDK library can be found at `<https://github.com/flexivrobotics/flexiv_rdk/releases/>`_.

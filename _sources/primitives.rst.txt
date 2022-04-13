@@ -1,5 +1,0 @@
-Primitives
-=============
-
-Primitives are unit actions and skills of the robot. They can be used collectively to form complex operations. 
-The full documentation for all available primitives can be found at `<https://flexivrobotics.github.io/primitives/>`_.
